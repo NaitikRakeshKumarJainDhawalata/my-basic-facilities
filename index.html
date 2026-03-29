@@ -41,21 +41,46 @@
             background-color: var(--bg-color);
             color: var(--text-color);
         }
+        
+        /* Permanent Header Banner Wrapper Fix  */
+        #global-sticky-zone {
+            position: sticky;
+            top: 0;
+            z-index: 150;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
 
-        /* Top Header Navigation */
+        /* Top Persistent Branding Banner Header Elements */
+        #my-brand-banner {
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 16px 20px;
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* Top Header Navigation Details Under Banner Header Menu Info Context Set System Tracker Area*/
         #navbar {
             display: flex;
             align-items: center;
             justify-content: space-between;
             background-color: var(--header-bg);
-            padding: 15px 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--border-color);
         }
 
         #nav-left { display: flex; align-items: center; gap: 15px; }
+        
+        #nav-right { flex-shrink: 0; display:flex; gap: 5px; }
+        
+        #page-title {
+            word-wrap: break-word; /* Allows full locations long titles to safely wrap in tight screens */
+            overflow-wrap: break-word; 
+            line-height: 1.4;
+        }
         
         button.btn {
             background: var(--primary);
@@ -70,13 +95,11 @@
 
         .hidden { display: none !important; }
 
-        /* Search Bar */
+        /* Search Bar Wrapper */
         #search-container {
-            padding: 15px 20px;
+            padding: 12px 20px;
             background: var(--bg-color);
-            position: sticky;
-            top: 55px;
-            z-index: 90;
+            border-bottom: 1px solid var(--border-color);
         }
         
         #search-box {
@@ -91,7 +114,7 @@
 
         /* Main Content List */
         #content-list {
-            padding: 10px 20px 80px 20px;
+            padding: 20px 20px 90px 20px;
             display: flex;
             flex-direction: column;
             gap: 15px;
@@ -127,19 +150,19 @@
         .contact-img { 
             width: 60px; height: 60px; border-radius: 50%; object-fit: cover; 
             border: 2px solid var(--primary);
-            cursor: pointer; /* Zoom tap action */
+            cursor: pointer; 
         }
         .contact-name { font-size: 20px; font-weight: bold; }
         .contact-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 5px; }
         
         .action-link {
             text-decoration: none; padding: 6px 12px; border-radius: 5px; color: white;
-            font-size: 14px; font-weight: bold; background: #34d399; /* default action color */
+            font-size: 14px; font-weight: bold; background: #34d399;
         }
         .action-link.map-link { background: #3b82f6; }
         .action-link.web-link { background: #f59e0b; }
 
-        /* Host Tooling styles on Card */
+        /* Host Tooling styles */
         .host-tools {
             position: absolute; right: 10px; top: 10px;
             display: flex; gap: 5px; background: rgba(0,0,0,0.6);
@@ -165,7 +188,7 @@
             justify-content: center; align-items: center; z-index: 200;
         }
         .modal {
-            background: var(--card-bg); padding: 25px; border-radius: 12px; width: 90%; max-width: 400px; max-height: 90vh; overflow-y: auto; color:var(--text-color); border:1px solid var(--border-color);
+            background: var(--card-bg); padding: 25px; border-radius: 12px; width: 90%; max-width: 450px; max-height: 90vh; overflow-y: auto; color:var(--text-color); border:1px solid var(--border-color);
         }
         .modal input, .modal select, .modal button {
             width: 100%; margin-top: 10px; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--container-bg); color:var(--text-color);
@@ -185,22 +208,31 @@
 </head>
 <body class="light-mode">
 
-    <!-- Navbar Section -->
-    <div id="navbar">
-        <div id="nav-left">
-            <button id="btn-back" class="btn hidden" onclick="navigateBack()">⬅ Back</button>
-            <strong id="page-title">Home Page</strong>
+    <!-- Global Persistent Zone - Holds Brand Title & Current Path Location Elements Safely Permanently -->
+    <div id="global-sticky-zone">
+        
+        <!-- Persistent Website Label Configuration -->
+        <div id="my-brand-banner">
+            My Basic Facilities
         </div>
-        <div id="nav-right">
-            <button id="btn-theme" class="btn" onclick="toggleTheme()">🌙</button>
-            <button id="btn-login-open" class="btn" onclick="openLogin()">🔒 Host</button>
-            <button id="btn-logout" class="btn hidden" onclick="logout()">🔓 Logout</button>
-        </div>
-    </div>
 
-    <!-- User Search on page contents -->
-    <div id="search-container">
-        <input type="text" id="search-box" placeholder="Search objects inside this page..." oninput="handleSearch()">
+        <!-- Navbar Details Setup Mapping -->
+        <div id="navbar">
+            <div id="nav-left">
+                <button id="btn-back" class="btn hidden" onclick="navigateBack()">⬅ Back</button>
+                <strong id="page-title">Home Page</strong>
+            </div>
+            <div id="nav-right">
+                <button id="btn-theme" class="btn" onclick="toggleTheme()">🌙</button>
+                <button id="btn-login-open" class="btn" onclick="openLogin()">🔒 Host</button>
+                <button id="btn-logout" class="btn hidden" onclick="logout()">🔓 Logout</button>
+            </div>
+        </div>
+
+        <div id="search-container">
+            <input type="text" id="search-box" placeholder="Search objects inside this page..." oninput="handleSearch()">
+        </div>
+
     </div>
 
     <!-- Actual Page elements renderer container -->
@@ -213,9 +245,7 @@
         <button class="btn" onclick="openCreateModal()">➕ Add New Object (Block/Line/Contact)</button>
     </div>
 
-    <!-- Modals Section below -->
-
-    <!-- Admin login form -->
+    <!-- Admin login form modal -->
     <div class="modal-overlay" id="modal-login">
         <div class="modal">
             <h3>Host Authentication Panel</h3>
@@ -224,6 +254,26 @@
             <input type="password" id="inp-pass" placeholder="Password">
             <button class="btn" style="background:#10b981;" onclick="doLogin()">Log in securely</button>
             <button class="btn close-btn-inline" onclick="closeModal('modal-login')">Cancel</button>
+        </div>
+    </div>
+
+    <!-- MOVE/TRANSFER LOCATION MODAL WITH SEARCH -->
+    <div class="modal-overlay" id="modal-move-folder-loc">
+        <div class="modal">
+            <h3 style="margin-bottom:5px; border-bottom:1px solid var(--border-color); padding-bottom:8px;">Transfer Content</h3>
+            
+            <label style="display:block; margin-top:15px; margin-bottom:5px; font-weight:bold; font-size:14px; opacity: 0.9;">Choose destination to shift object:</label>
+            
+            <!-- LIVE SEARCH FOR DESTINATIONS -->
+            <input type="text" id="move-search-filter" placeholder="🔍 Search folder name..." onkeyup="filterMoveLocs()" style="margin-top: 5px; margin-bottom: 10px;">
+            
+            <!-- LISTBOX WITH FIXED SIZE FOR EASIER FILTER VISIBILITY -->
+            <select id="move-destination-picker-list" size="7" style="margin-bottom:15px; font-size:14px;">
+                 <!-- generated folder paths dynamically via mapping list -->
+            </select>
+            
+            <button class="btn" style="background:var(--primary); font-weight: bold; width:100%; margin-top: 10px;" onclick="executeCommitConfirmationForNodeTransportationToNewLocationSystemUpdateRoutineMethodStateTransferOperationExecutionLogicConfirmOperationFunctionStoreOpSaveCallConfigToolActionRunConfirmRunDrop()">✅ Drop Transfer (Move Here)</button>
+            <button class="btn close-btn-inline" style="width:100%; background:#ef4444;" onclick="closeModal('modal-move-folder-loc')">❌ Cancel / Close</button>
         </div>
     </div>
 
@@ -272,14 +322,14 @@
 
         // Your web app's Firebase configuration
         const firebaseConfig = {
-  apiKey: "AIzaSyC04yKj1wlv-GjKEtphMNGnF4Jh9UeYWy0",
-  authDomain: "my-basic-facilities.firebaseapp.com",
-  databaseURL: "https://my-basic-facilities-default-rtdb.firebaseio.com",
-  projectId: "my-basic-facilities",
-  storageBucket: "my-basic-facilities.firebasestorage.app",
-  messagingSenderId: "507106066548",
-  appId: "1:507106066548:web:5ea6afc3507de8534c9121"
-};
+            apiKey: "AIzaSyC04yKj1wlv-GjKEtphMNGnF4Jh9UeYWy0",
+            authDomain: "my-basic-facilities.firebaseapp.com",
+            databaseURL: "https://my-basic-facilities-default-rtdb.firebaseio.com",
+            projectId: "my-basic-facilities",
+            storageBucket: "my-basic-facilities.firebasestorage.app",
+            messagingSenderId: "507106066548",
+            appId: "1:507106066548:web:5ea6afc3507de8534c9121"
+        };
 
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
@@ -289,6 +339,8 @@
         let navigationHistory = ["root"]; // holds ids. The very end element[array.length-1] points towards where you are exactly
         let dbData = null; // Whole tree structured db stored locally per domain instance.
         let hostAuthorized = false; 
+
+        window.tempVarIdToTransferFolderLocDataConfigCurrentVarLoc = null;
 
         // Initial standard dummy setup incase completely clean DB setup triggers upon user enter 
         function defineDefaultData() {
@@ -349,99 +401,112 @@
                 console.error("Firebase save failed", err);
                 alert("Database Synchronization Failed");
             });
-            loadUiNodeCurrentPageLevelView(); // update elements screen seamlessly everytime store changes completely natively internally. 
+            loadUiNodeCurrentPageLevelView(); 
         }
 
-        // Recursive tree scanner parser -> extracts an explicit node branch purely off unique text generated identifier references! 
+        // Recursive tree scanner parser 
         function scanIDNodeSystem(startPointObj, lookIDStrVar){
             if (startPointObj.id === lookIDStrVar) return startPointObj;
-            for(let scanChildsLoopingRefArrVarsListItemsIdxLoopNumbrChildsElementsArrrayVarsItemsObjVar of startPointObj.children) {
-                let deepresult = scanIDNodeSystem(scanChildsLoopingRefArrVarsListItemsIdxLoopNumbrChildsElementsArrrayVarsItemsObjVar, lookIDStrVar);
+            for(let childObj of startPointObj.children) {
+                let deepresult = scanIDNodeSystem(childObj, lookIDStrVar);
                 if (deepresult) return deepresult;
             } return null;
         }
 
-        /* Front rendering routines logic UI display mappings! */
+        /* Front rendering routines logic UI display */
         function loadUiNodeCurrentPageLevelView() {
-            if(!dbData) return; // Prevent render if Firebase hasn't resolved initial payload yet
+            if(!dbData) return; 
 
-            const levelIdentifierActiveScreenScopeIdNowUsedRenderObjStrValueVarXStrHereCurrentFocusLayerValueUsedVariableSystemNodeArrDataIdStrTypeIsStrTypeFormatVarStringLevel = navigationHistory[navigationHistory.length - 1]; 
-            const nodeInfoExtractionTargetForViewingRenderingUiDrawObjActiveTargetReferenceExtractedValueItemExtrapolatedTargetReferenceExtractedValueItemTypeObjClassDefObjValueRetvResForDisplayViewingTypeTypeReferenceCurrentValueVarLayerLayerNowRenderingObjectFromScopeObjectObjRefNowExtractedSystemLayerRefCurrentVariableValueForThisContextOfDataIsTypeLayerObjectReferingHereRefLayerFromScopeTargetValueRenderingValueLayerLevelObjDefTargetExtractionObjectLayerActiveCurrentExtractionRefCurrentIsHere = scanIDNodeSystem(dbData, levelIdentifierActiveScreenScopeIdNowUsedRenderObjStrValueVarXStrHereCurrentFocusLayerValueUsedVariableSystemNodeArrDataIdStrTypeIsStrTypeFormatVarStringLevel); 
-            let rootRenderPointVarDivToDrawHTMLNodesRefObjSysHTMLContainerLayerRenderAreaDivTagElementsRefIdDOMHtmlContainerAreaNodeDisplayToPaintScreenContextContextList = document.getElementById("content-list");
+            const currentLayerId = navigationHistory[navigationHistory.length - 1]; 
+            const nodeObjectScopeExtraction = scanIDNodeSystem(dbData, currentLayerId); 
+            let viewListContainer = document.getElementById("content-list");
 
-            // Change Header Bar Information! Updates Nav Details Based UI Current View
-            document.getElementById("page-title").innerText = (nodeInfoExtractionTargetForViewingRenderingUiDrawObjActiveTargetReferenceExtractedValueItemExtrapolatedTargetReferenceExtractedValueItemTypeObjClassDefObjValueRetvResForDisplayViewingTypeTypeReferenceCurrentValueVarLayerLayerNowRenderingObjectFromScopeObjectObjRefNowExtractedSystemLayerRefCurrentVariableValueForThisContextOfDataIsTypeLayerObjectReferingHereRefLayerFromScopeTargetValueRenderingValueLayerLevelObjDefTargetExtractionObjectLayerActiveCurrentExtractionRefCurrentIsHere.title || "Unknown Page Location / Corrupt Value View Error! Rebuilding...");
+            // Build internally complete location directory strings (Breadcrumb Path Gen)
+            let fullExpandedBreadCrumbTextPathLocation = "";
+            for (let idxTrack=0; idxTrack < navigationHistory.length; idxTrack++){
+                 let refExtractionScopeNode = scanIDNodeSystem(dbData, navigationHistory[idxTrack]);
+                 if(refExtractionScopeNode && refExtractionScopeNode.title){
+                     fullExpandedBreadCrumbTextPathLocation += refExtractionScopeNode.title;
+                     if (idxTrack < navigationHistory.length - 1) {
+                         fullExpandedBreadCrumbTextPathLocation += " ➔ ";
+                     }
+                 }
+            }
+
+            document.getElementById("page-title").innerText = fullExpandedBreadCrumbTextPathLocation || "Navigation Failure Link Area";
+            
             if(navigationHistory.length > 1) { document.getElementById("btn-back").classList.remove("hidden"); } else { document.getElementById("btn-back").classList.add("hidden"); }
             
-            rootRenderPointVarDivToDrawHTMLNodesRefObjSysHTMLContainerLayerRenderAreaDivTagElementsRefIdDOMHtmlContainerAreaNodeDisplayToPaintScreenContextContextList.innerHTML = "";
-            let localStrCurrentLevelSearchDataKeywordRefRawInputValueCurrent = document.getElementById("search-box").value.toLowerCase(); 
+            viewListContainer.innerHTML = "";
+            let searchTextStrSearchConfigContextParamVarKeyword = document.getElementById("search-box").value.toLowerCase(); 
 
-            // Generating blocks using native Array manipulations iteration tools
-            nodeInfoExtractionTargetForViewingRenderingUiDrawObjActiveTargetReferenceExtractedValueItemExtrapolatedTargetReferenceExtractedValueItemTypeObjClassDefObjValueRetvResForDisplayViewingTypeTypeReferenceCurrentValueVarLayerLayerNowRenderingObjectFromScopeObjectObjRefNowExtractedSystemLayerRefCurrentVariableValueForThisContextOfDataIsTypeLayerObjectReferingHereRefLayerFromScopeTargetValueRenderingValueLayerLevelObjDefTargetExtractionObjectLayerActiveCurrentExtractionRefCurrentIsHere.children.forEach((cElementVarForCurrentTargetLayerBranchCurrentChildValIterativePassDataValLayerBranchRefItemElementVarOfTreeValElementValArrayValIteratnElementItemParamOfThisRefIterationLevelForDisplayRenderDataNodeIndexElementDataVal, localListNumericalIDXValueOfPositionalElementsSequenceArr) => {
+            // Generating UI Object View Card Arrays list logic system blocks setup iter setup Array Setup 
+            nodeObjectScopeExtraction.children.forEach((cChildObjectRefCurrentNavDirPosIterSetupListCurrentElementIterVarLoopArrNumObj, positionalArrayIntCurrentIterationLayerNodeIdxIntNumSysArrListLoopIntReferenceValNumIdxIntValLoopArrayRefTargetPosExtIntNumVal) => {
                 
-                // Hide or Apply search parameter keywords string comparisons criteria
-                if(!hostAuthorized && cElementVarForCurrentTargetLayerBranchCurrentChildValIterativePassDataValLayerBranchRefItemElementVarOfTreeValElementValArrayValIteratnElementItemParamOfThisRefIterationLevelForDisplayRenderDataNodeIndexElementDataVal.hidden) return; // Users should not load skipped hid items unless strictly a permission's overriding them from loading rule exclusions above !  
-                if(localStrCurrentLevelSearchDataKeywordRefRawInputValueCurrent.length > 0 && !cElementVarForCurrentTargetLayerBranchCurrentChildValIterativePassDataValLayerBranchRefItemElementVarOfTreeValElementValArrayValIteratnElementItemParamOfThisRefIterationLevelForDisplayRenderDataNodeIndexElementDataVal.title.toLowerCase().includes(localStrCurrentLevelSearchDataKeywordRefRawInputValueCurrent)){ return;} // Exclusion via mismatch to title param rule evaluation false positive exit skipping
+                if(!hostAuthorized && cChildObjectRefCurrentNavDirPosIterSetupListCurrentElementIterVarLoopArrNumObj.hidden) return; 
+                if(searchTextStrSearchConfigContextParamVarKeyword.length > 0 && !cChildObjectRefCurrentNavDirPosIterSetupListCurrentElementIterVarLoopArrNumObj.title.toLowerCase().includes(searchTextStrSearchConfigContextParamVarKeyword)){ return;} 
 
-                // Creates UI Structure dynamically built with basic text rendering operations mappings templates functions
-                let finalHTMLElementCardBlockDivCreationVarConstructHtmlRawNodeStringStrRepresentationNodeTextRenderFinalItemValFormatDOMObjReferenceVarNodeElementStrFinalDOMComponentDisplayStrValTextCodeCardTagWrapperOuterElementParentDomChildBlockCardClassStringRepresentationContainerLayerOuterDivMainCardRefElemNodeElClassItemMainHTMLOutputBuilderVariableTextGenResHTMLHTMLVarCard = document.createElement("div"); 
-                finalHTMLElementCardBlockDivCreationVarConstructHtmlRawNodeStringStrRepresentationNodeTextRenderFinalItemValFormatDOMObjReferenceVarNodeElementStrFinalDOMComponentDisplayStrValTextCodeCardTagWrapperOuterElementParentDomChildBlockCardClassStringRepresentationContainerLayerOuterDivMainCardRefElemNodeElClassItemMainHTMLOutputBuilderVariableTextGenResHTMLHTMLVarCard.className = "card " + (cElementVarForCurrentTargetLayerBranchCurrentChildValIterativePassDataValLayerBranchRefItemElementVarOfTreeValElementValArrayValIteratnElementItemParamOfThisRefIterationLevelForDisplayRenderDataNodeIndexElementDataVal.hidden ? "temporarily-removed": "");
+                let layoutNodeObjectComponentFinalCreationBlockDIVWrapperBuildRefElementContainerStrConstructDivLayerDomDivRootSysTagWrapperBoxElHtml = document.createElement("div"); 
+                layoutNodeObjectComponentFinalCreationBlockDIVWrapperBuildRefElementContainerStrConstructDivLayerDomDivRootSysTagWrapperBoxElHtml.className = "card " + (cChildObjectRefCurrentNavDirPosIterSetupListCurrentElementIterVarLoopArrNumObj.hidden ? "temporarily-removed": "");
 
-                // Navigation into that structure upon click is global default (like windows files sys root folders access interactions )
-                finalHTMLElementCardBlockDivCreationVarConstructHtmlRawNodeStringStrRepresentationNodeTextRenderFinalItemValFormatDOMObjReferenceVarNodeElementStrFinalDOMComponentDisplayStrValTextCodeCardTagWrapperOuterElementParentDomChildBlockCardClassStringRepresentationContainerLayerOuterDivMainCardRefElemNodeElClassItemMainHTMLOutputBuilderVariableTextGenResHTMLHTMLVarCard.onclick = () => forwardLayer(cElementVarForCurrentTargetLayerBranchCurrentChildValIterativePassDataValLayerBranchRefItemElementVarOfTreeValElementValArrayValIteratnElementItemParamOfThisRefIterationLevelForDisplayRenderDataNodeIndexElementDataVal.id);
+                if(cChildObjectRefCurrentNavDirPosIterSetupListCurrentElementIterVarLoopArrNumObj.type !== 'contact'){
+                     layoutNodeObjectComponentFinalCreationBlockDIVWrapperBuildRefElementContainerStrConstructDivLayerDomDivRootSysTagWrapperBoxElHtml.onclick = () => forwardLayer(cChildObjectRefCurrentNavDirPosIterSetupListCurrentElementIterVarLoopArrNumObj.id);
+                } else {
+                     layoutNodeObjectComponentFinalCreationBlockDIVWrapperBuildRefElementContainerStrConstructDivLayerDomDivRootSysTagWrapperBoxElHtml.style.cursor = 'default';
+                }
 
-                // Build internally according to types specifically : Layout Switchers ( text line VS block view Image VS full flex cards content display rendering mode layouts implementations designs formatting variations cases branches ! )
-                let itemStringBuilderInnerHTMLInternal = "";
-                if(cElementVarForCurrentTargetLayerBranchCurrentChildValIterativePassDataValLayerBranchRefItemElementVarOfTreeValElementValArrayValIteratnElementItemParamOfThisRefIterationLevelForDisplayRenderDataNodeIndexElementDataVal.type === 'text') {
-                    itemStringBuilderInnerHTMLInternal += `<div class="type-textline">${escapeHTML(cElementVarForCurrentTargetLayerBranchCurrentChildValIterativePassDataValLayerBranchRefItemElementVarOfTreeValElementValArrayValIteratnElementItemParamOfThisRefIterationLevelForDisplayRenderDataNodeIndexElementDataVal.title)}</div>`;
+                let buildObjectDynamicLayoutMapConfigSetupLayerLogicStringVariablesSetupModGenSysMapText = "";
+                if(cChildObjectRefCurrentNavDirPosIterSetupListCurrentElementIterVarLoopArrNumObj.type === 'text') {
+                    buildObjectDynamicLayoutMapConfigSetupLayerLogicStringVariablesSetupModGenSysMapText += `<div class="type-textline">${escapeHTML(cChildObjectRefCurrentNavDirPosIterSetupListCurrentElementIterVarLoopArrNumObj.title)}</div>`;
                 } 
-                else if(cElementVarForCurrentTargetLayerBranchCurrentChildValIterativePassDataValLayerBranchRefItemElementVarOfTreeValElementValArrayValIteratnElementItemParamOfThisRefIterationLevelForDisplayRenderDataNodeIndexElementDataVal.type === 'image') {
-                    itemStringBuilderInnerHTMLInternal += `
+                else if(cChildObjectRefCurrentNavDirPosIterSetupListCurrentElementIterVarLoopArrNumObj.type === 'image') {
+                    buildObjectDynamicLayoutMapConfigSetupLayerLogicStringVariablesSetupModGenSysMapText += `
                         <div class="type-blockimage">
-                           <img src="${cElementVarForCurrentTargetLayerBranchCurrentChildValIterativePassDataValLayerBranchRefItemElementVarOfTreeValElementValArrayValIteratnElementItemParamOfThisRefIterationLevelForDisplayRenderDataNodeIndexElementDataVal.imgSrc || 'https://via.placeholder.com/800x400.png?text=Broken+Image+Load'}" alt="img_item" loading="lazy">
-                           <div class="img-text">${escapeHTML(cElementVarForCurrentTargetLayerBranchCurrentChildValIterativePassDataValLayerBranchRefItemElementVarOfTreeValElementValArrayValIteratnElementItemParamOfThisRefIterationLevelForDisplayRenderDataNodeIndexElementDataVal.title)}</div>
+                           <img src="${cChildObjectRefCurrentNavDirPosIterSetupListCurrentElementIterVarLoopArrNumObj.imgSrc || 'https://via.placeholder.com/800x400.png?text=Broken+Image+Load'}" alt="img_item" loading="lazy">
+                           <div class="img-text">${escapeHTML(cChildObjectRefCurrentNavDirPosIterSetupListCurrentElementIterVarLoopArrNumObj.title)}</div>
                         </div>`;
                 }
-                else if(cElementVarForCurrentTargetLayerBranchCurrentChildValIterativePassDataValLayerBranchRefItemElementVarOfTreeValElementValArrayValIteratnElementItemParamOfThisRefIterationLevelForDisplayRenderDataNodeIndexElementDataVal.type === 'contact') {
-                    let btnLinkBuildResOutOptHTMLStringsVariablesStoreComponentsInternalDynamicCodeStringConstructPartsBuilderSubPartLinksConstructPhoneDialVarPartComponentPartMapsComponentLocationParamVarCompSiteAddressParamObjVarWebsiteUrlWebStrMapSubVarLinkOutBuild = "";
-                    if(cElementVarForCurrentTargetLayerBranchCurrentChildValIterativePassDataValLayerBranchRefItemElementVarOfTreeValElementValArrayValIteratnElementItemParamOfThisRefIterationLevelForDisplayRenderDataNodeIndexElementDataVal.phone) btnLinkBuildResOutOptHTMLStringsVariablesStoreComponentsInternalDynamicCodeStringConstructPartsBuilderSubPartLinksConstructPhoneDialVarPartComponentPartMapsComponentLocationParamVarCompSiteAddressParamObjVarWebsiteUrlWebStrMapSubVarLinkOutBuild += `<a href="tel:${cElementVarForCurrentTargetLayerBranchCurrentChildValIterativePassDataValLayerBranchRefItemElementVarOfTreeValElementValArrayValIteratnElementItemParamOfThisRefIterationLevelForDisplayRenderDataNodeIndexElementDataVal.phone}" class="action-link" onclick="event.stopPropagation()">📞 Call</a>`;
-                    if(cElementVarForCurrentTargetLayerBranchCurrentChildValIterativePassDataValLayerBranchRefItemElementVarOfTreeValElementValArrayValIteratnElementItemParamOfThisRefIterationLevelForDisplayRenderDataNodeIndexElementDataVal.websiteLink) btnLinkBuildResOutOptHTMLStringsVariablesStoreComponentsInternalDynamicCodeStringConstructPartsBuilderSubPartLinksConstructPhoneDialVarPartComponentPartMapsComponentLocationParamVarCompSiteAddressParamObjVarWebsiteUrlWebStrMapSubVarLinkOutBuild += `<a href="${cElementVarForCurrentTargetLayerBranchCurrentChildValIterativePassDataValLayerBranchRefItemElementVarOfTreeValElementValArrayValIteratnElementItemParamOfThisRefIterationLevelForDisplayRenderDataNodeIndexElementDataVal.websiteLink.startsWith('http')?cElementVarForCurrentTargetLayerBranchCurrentChildValIterativePassDataValLayerBranchRefItemElementVarOfTreeValElementValArrayValIteratnElementItemParamOfThisRefIterationLevelForDisplayRenderDataNodeIndexElementDataVal.websiteLink:'https://'+cElementVarForCurrentTargetLayerBranchCurrentChildValIterativePassDataValLayerBranchRefItemElementVarOfTreeValElementValArrayValIteratnElementItemParamOfThisRefIterationLevelForDisplayRenderDataNodeIndexElementDataVal.websiteLink}" target="_blank" class="action-link web-link" onclick="event.stopPropagation()">🌐 Website Go</a>`;
-                    if(cElementVarForCurrentTargetLayerBranchCurrentChildValIterativePassDataValLayerBranchRefItemElementVarOfTreeValElementValArrayValIteratnElementItemParamOfThisRefIterationLevelForDisplayRenderDataNodeIndexElementDataVal.locationDesc) btnLinkBuildResOutOptHTMLStringsVariablesStoreComponentsInternalDynamicCodeStringConstructPartsBuilderSubPartLinksConstructPhoneDialVarPartComponentPartMapsComponentLocationParamVarCompSiteAddressParamObjVarWebsiteUrlWebStrMapSubVarLinkOutBuild += `<a href="https://maps.google.com/?q=${encodeURIComponent(cElementVarForCurrentTargetLayerBranchCurrentChildValIterativePassDataValLayerBranchRefItemElementVarOfTreeValElementValArrayValIteratnElementItemParamOfThisRefIterationLevelForDisplayRenderDataNodeIndexElementDataVal.locationDesc)}" target="_blank" class="action-link map-link" onclick="event.stopPropagation()">📍 Location Go</a>`;
+                else if(cChildObjectRefCurrentNavDirPosIterSetupListCurrentElementIterVarLoopArrNumObj.type === 'contact') {
+                    let internalComponentsHTMLRefLinksButtonGenTextMapLinkVariablesOptionsRef = "";
+                    if(cChildObjectRefCurrentNavDirPosIterSetupListCurrentElementIterVarLoopArrNumObj.phone) internalComponentsHTMLRefLinksButtonGenTextMapLinkVariablesOptionsRef += `<a href="tel:${cChildObjectRefCurrentNavDirPosIterSetupListCurrentElementIterVarLoopArrNumObj.phone}" class="action-link" onclick="event.stopPropagation()">📞 Call</a>`;
+                    if(cChildObjectRefCurrentNavDirPosIterSetupListCurrentElementIterVarLoopArrNumObj.websiteLink) internalComponentsHTMLRefLinksButtonGenTextMapLinkVariablesOptionsRef += `<a href="${cChildObjectRefCurrentNavDirPosIterSetupListCurrentElementIterVarLoopArrNumObj.websiteLink.startsWith('http')?cChildObjectRefCurrentNavDirPosIterSetupListCurrentElementIterVarLoopArrNumObj.websiteLink:'https://'+cChildObjectRefCurrentNavDirPosIterSetupListCurrentElementIterVarLoopArrNumObj.websiteLink}" target="_blank" class="action-link web-link" onclick="event.stopPropagation()">🌐 Website Go</a>`;
+                    if(cChildObjectRefCurrentNavDirPosIterSetupListCurrentElementIterVarLoopArrNumObj.locationDesc) internalComponentsHTMLRefLinksButtonGenTextMapLinkVariablesOptionsRef += `<a href="https://maps.google.com/?q=${encodeURIComponent(cChildObjectRefCurrentNavDirPosIterSetupListCurrentElementIterVarLoopArrNumObj.locationDesc)}" target="_blank" class="action-link map-link" onclick="event.stopPropagation()">📍 Location Go</a>`;
                     
-                    itemStringBuilderInnerHTMLInternal += `
+                    buildObjectDynamicLayoutMapConfigSetupLayerLogicStringVariablesSetupModGenSysMapText += `
                         <div class="type-contact">
                            <div class="contact-header">
-                              <img src="${cElementVarForCurrentTargetLayerBranchCurrentChildValIterativePassDataValLayerBranchRefItemElementVarOfTreeValElementValArrayValIteratnElementItemParamOfThisRefIterationLevelForDisplayRenderDataNodeIndexElementDataVal.imgSrc || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'}" alt="img_item" class="contact-img" onclick="showPictureFullScreenImageTapCallSystemLogicHookOverrideFuncParamEventLogicStopFlowControlPropLogic(event, this.src)">
-                              <div class="contact-name">${escapeHTML(cElementVarForCurrentTargetLayerBranchCurrentChildValIterativePassDataValLayerBranchRefItemElementVarOfTreeValElementValArrayValIteratnElementItemParamOfThisRefIterationLevelForDisplayRenderDataNodeIndexElementDataVal.title)}</div>
+                              <img src="${cChildObjectRefCurrentNavDirPosIterSetupListCurrentElementIterVarLoopArrNumObj.imgSrc || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'}" alt="img_item" class="contact-img" onclick="showPictureFullScreenImageTapCallSystemLogicHookOverrideFuncParamEventLogicStopFlowControlPropLogic(event, this.src)">
+                              <div class="contact-name">${escapeHTML(cChildObjectRefCurrentNavDirPosIterSetupListCurrentElementIterVarLoopArrNumObj.title)}</div>
                            </div>
-                           <div class="contact-actions">${btnLinkBuildResOutOptHTMLStringsVariablesStoreComponentsInternalDynamicCodeStringConstructPartsBuilderSubPartLinksConstructPhoneDialVarPartComponentPartMapsComponentLocationParamVarCompSiteAddressParamObjVarWebsiteUrlWebStrMapSubVarLinkOutBuild}</div>
+                           <div class="contact-actions">${internalComponentsHTMLRefLinksButtonGenTextMapLinkVariablesOptionsRef}</div>
                         </div>`;
                 }
 
-                // Append powerful management action options to edit layout when admin has authenticated keys system overrides active 
                 if(hostAuthorized) {
-                     itemStringBuilderInnerHTMLInternal += `<div class="host-tools" onclick="event.stopPropagation()">
-                           <button title="Shift Component Positioning Shift Down Priority Level Swap Arrangement Element Operation Order Shift" onclick="relocateSequenceValElemDownObjFunctionSysMoveValSystemLogicFlowMethodDirectionArrow(${localListNumericalIDXValueOfPositionalElementsSequenceArr})">⬇</button>
-                           <button title="Shift Place Position Above Up Object Logic System Placement Modifier Move Object Command Button Operation Level Swap Data" onclick="relocateSequenceValElemUpObjFunctionSysMoveValSystemLogicFlowMethodDirectionArrow(${localListNumericalIDXValueOfPositionalElementsSequenceArr})">⬆</button>
-                           <button title="Temporarily Toggle Off Remove Visible View Hider State Param Logic Mod Method Boolean Change Update Data Set Action Status Alter Switch Command Setting Visibility User Override System Access Limit Function Hide Disable Vis Command Hide Operation Action Action Update Call Setup Configure Vis Control Hidden Setup Method Operation Logic Run Configuration Update Set Switch Execute Set Control Execute Hidden Set Flag Override Property Property Config Modifier Execution Trigger Configuration" onclick="flipVisibleStatusStateParamForTargetLevelScopeItemFunctionRunParamSetUpdateObjectBoolSysChangeMod(${localListNumericalIDXValueOfPositionalElementsSequenceArr})">${cElementVarForCurrentTargetLayerBranchCurrentChildValIterativePassDataValLayerBranchRefItemElementVarOfTreeValElementValArrayValIteratnElementItemParamOfThisRefIterationLevelForDisplayRenderDataNodeIndexElementDataVal.hidden ? '👁 Show' : '🙈 Hide'}</button>
-                           <button title="Open Edit Change Info Screen UI Data Property Set Configurations Parameters Set Modifications Parameters Text Variables Config UI Load Change Modify Options Details Editor Input Param Logic Method Modify Execute Execute Operation Exec Run Call Trigger Load Action Execute Load Param Object Info Modify Screen Interface Edit Modifier Tool Command Method Configure Setup Mod Method Edit Info Details Param Change Tool Property Configure Option Command UI Execute Operation Configuration Action Setup Update Value Modifier Logic Execute Setup Screen Action Open Call Set Run Exec Trigger Trigger Editor Open Edit Method Mod Modify Function Call Call" onclick="activateModifyObjValuesLevelMenuOpenerToolBoxFormConfigMethodActionFunctionExecuteMethodModifierLoaderExecutionMethodTargetSysLayerRefTargetDataConfigCall( '${cElementVarForCurrentTargetLayerBranchCurrentChildValIterativePassDataValLayerBranchRefItemElementVarOfTreeValElementValArrayValIteratnElementItemParamOfThisRefIterationLevelForDisplayRenderDataNodeIndexElementDataVal.id}' )">✏ Edit</button>
-                           <button title="Permanent Erase Content Permanently Remove Erase Purge Function Data Remove Logic Obj Array Element Delete Cut Slice Pop Drop Unlink Dump Drop Node Eliminate Kill Flush Bin Delete Data Node Item Disconnect Strip Wipe Run Function Erase Run Execution Method Setup Execute Tool Method Erase Erase Option Erase Trash Operation Option Clear Dump Drop Command Command Execute Bin Method Trash Erase Call Erase Call Wipe Call Call Execute Remove Function Disconnect Wipe Run Execution Bin Execute Option Command Tool Operation Tool Run System Remove Execute Execution Config Delete Run" style="color:#ef4444;" onclick="sliceDataDumpCompletelyLogicSystemDeleteParamRemoveEraseArrayNodeObjectMethodCallEraseToolOperationBinCommandExecution( ${localListNumericalIDXValueOfPositionalElementsSequenceArr} )">🗑</button>
+                     buildObjectDynamicLayoutMapConfigSetupLayerLogicStringVariablesSetupModGenSysMapText += `<div class="host-tools" onclick="event.stopPropagation()">
+                           <button title="Shift Component Position Down" onclick="relocateSequenceValElemDownObjFunctionSysMoveValSystemLogicFlowMethodDirectionArrow(${positionalArrayIntCurrentIterationLayerNodeIdxIntNumSysArrListLoopIntReferenceValNumIdxIntValLoopArrayRefTargetPosExtIntNumVal})">⬇</button>
+                           <button title="Shift Component Position Up" onclick="relocateSequenceValElemUpObjFunctionSysMoveValSystemLogicFlowMethodDirectionArrow(${positionalArrayIntCurrentIterationLayerNodeIdxIntNumSysArrListLoopIntReferenceValNumIdxIntValLoopArrayRefTargetPosExtIntNumVal})">⬆</button>
+                           
+                           <!-- Tool Options Transfer Relocate Tool -->
+                           <button title="Transfer Data Folder Destination Mod Exec" style="color:#f59e0b; font-weight: bold;" onclick="executeItemMoveSequenceToTransferOperationLocationSystemAction('${cChildObjectRefCurrentNavDirPosIterSetupListCurrentElementIterVarLoopArrNumObj.id}')">🚚 Move</button>
+                           
+                           <button title="Toggle Off Visibility Method Option Tools Action Drop Switch Override Map View Switch" onclick="flipVisibleStatusStateParamForTargetLevelScopeItemFunctionRunParamSetUpdateObjectBoolSysChangeMod(${positionalArrayIntCurrentIterationLayerNodeIdxIntNumSysArrListLoopIntReferenceValNumIdxIntValLoopArrayRefTargetPosExtIntNumVal})">${cChildObjectRefCurrentNavDirPosIterSetupListCurrentElementIterVarLoopArrNumObj.hidden ? '👁 Show' : '🙈 Hide'}</button>
+                           <button title="Edit Interface Setup UI Tools Change Set Target Ext Setting Value Tool Exec UI Modifier Configuration System" onclick="activateModifyObjValuesLevelMenuOpenerToolBoxFormConfigMethodActionFunctionExecuteMethodModifierLoaderExecutionMethodTargetSysLayerRefTargetDataConfigCall( '${cChildObjectRefCurrentNavDirPosIterSetupListCurrentElementIterVarLoopArrNumObj.id}' )">✏ Edit</button>
+                           <button title="Erase Purge Drop Bin Erase Tools Set Route Cut Run Options Slice Slice Operation Dump Ext Map Remove" style="color:#ef4444;" onclick="sliceDataDumpCompletelyLogicSystemDeleteParamRemoveEraseArrayNodeObjectMethodCallEraseToolOperationBinCommandExecution( ${positionalArrayIntCurrentIterationLayerNodeIdxIntNumSysArrListLoopIntReferenceValNumIdxIntValLoopArrayRefTargetPosExtIntNumVal} )">🗑</button>
                         </div>`;
                 }
                 
-                finalHTMLElementCardBlockDivCreationVarConstructHtmlRawNodeStringStrRepresentationNodeTextRenderFinalItemValFormatDOMObjReferenceVarNodeElementStrFinalDOMComponentDisplayStrValTextCodeCardTagWrapperOuterElementParentDomChildBlockCardClassStringRepresentationContainerLayerOuterDivMainCardRefElemNodeElClassItemMainHTMLOutputBuilderVariableTextGenResHTMLHTMLVarCard.innerHTML = itemStringBuilderInnerHTMLInternal;
-                rootRenderPointVarDivToDrawHTMLNodesRefObjSysHTMLContainerLayerRenderAreaDivTagElementsRefIdDOMHtmlContainerAreaNodeDisplayToPaintScreenContextContextList.appendChild(finalHTMLElementCardBlockDivCreationVarConstructHtmlRawNodeStringStrRepresentationNodeTextRenderFinalItemValFormatDOMObjReferenceVarNodeElementStrFinalDOMComponentDisplayStrValTextCodeCardTagWrapperOuterElementParentDomChildBlockCardClassStringRepresentationContainerLayerOuterDivMainCardRefElemNodeElClassItemMainHTMLOutputBuilderVariableTextGenResHTMLHTMLVarCard);
+                layoutNodeObjectComponentFinalCreationBlockDIVWrapperBuildRefElementContainerStrConstructDivLayerDomDivRootSysTagWrapperBoxElHtml.innerHTML = buildObjectDynamicLayoutMapConfigSetupLayerLogicStringVariablesSetupModGenSysMapText;
+                viewListContainer.appendChild(layoutNodeObjectComponentFinalCreationBlockDIVWrapperBuildRefElementContainerStrConstructDivLayerDomDivRootSysTagWrapperBoxElHtml);
             });
         }
 
         // System Event Intercepts Functions Logics
-        function handleSearch() {
-            loadUiNodeCurrentPageLevelView();
-        }
+        function handleSearch() { loadUiNodeCurrentPageLevelView(); }
 
-        function forwardLayer(childSystemObjIdLayerToOpenForwardReferenceStepIntoMethodFolderLogicNavigationStringIdentiferTextValSysIDNodeChildTarget) {
+        function forwardLayer(folderDestinationNextLevelIdentCodePushArrayValPathLayerIdDirStringReference) {
             document.getElementById('search-box').value = '';
-            navigationHistory.push(childSystemObjIdLayerToOpenForwardReferenceStepIntoMethodFolderLogicNavigationStringIdentiferTextValSysIDNodeChildTarget);
+            navigationHistory.push(folderDestinationNextLevelIdentCodePushArrayValPathLayerIdDirStringReference);
             loadUiNodeCurrentPageLevelView();
         }
         function navigateBack() {
@@ -451,44 +516,40 @@
                 loadUiNodeCurrentPageLevelView();
             }
         }
-        function toggleTheme() {
-            document.body.classList.toggle('dark-mode');
-        }
+        function toggleTheme() { document.body.classList.toggle('dark-mode'); }
 
-        // Tap picture contact specific -> Expand fully instead of standard card click behavior
-        function showPictureFullScreenImageTapCallSystemLogicHookOverrideFuncParamEventLogicStopFlowControlPropLogic(triggeredEventValObjForDomBubbleStopperObjMethodValReferenceRefEventClickObjInteractedUserValVarMouse, photoDataLinkStrURIValToApplyRenderDOMSrcURLPathAttrVariableSrcStringDataVariableDataLinkVal) {
-             triggeredEventValObjForDomBubbleStopperObjMethodValReferenceRefEventClickObjInteractedUserValVarMouse.stopPropagation();
-             document.getElementById('fullscreen-viewer-src').src = photoDataLinkStrURIValToApplyRenderDOMSrcURLPathAttrVariableSrcStringDataVariableDataLinkVal;
+        // Tap picture contact specific hook logic !
+        function showPictureFullScreenImageTapCallSystemLogicHookOverrideFuncParamEventLogicStopFlowControlPropLogic(evtDOMClickStopperRefSystemActionArgTrigger, pictureURIImageParamToExpandViewFullscreenReferencePathStringImageURLFormat) {
+             evtDOMClickStopperRefSystemActionArgTrigger.stopPropagation();
+             document.getElementById('fullscreen-viewer-src').src = pictureURIImageParamToExpandViewFullscreenReferencePathStringImageURLFormat;
              document.getElementById('fullscreen-img-overlay').style.display = 'flex';
         }
         
-
-        /* --- AUTH SECURITY HOST TOOLS MODULE BLOCK ----- */
+        // Modal & Host Security Functions Suite 
         function openLogin() {
             if(!hostAuthorized) document.getElementById('modal-login').style.display='flex';
         }
-        function closeModal(identValDomLayerValRefDomIdentSelectorValVarObjSelectorStrValDataName) {
-            document.getElementById(identValDomLayerValRefDomIdentSelectorValVarObjSelectorStrValDataName).style.display = 'none';
+        function closeModal(domModalReferenceToHideStyleNameValIdentScopeVarLocSysHideNameOpParamIdOpCloseNameDataIdentReferenceTargetCloseFormValLocStringDOMReferenceOpNameVarSelectParamNameIDOpFormToolDirStrSelectorIdentTargetLayerToHidesystemOpObjToolsConfigFormStrPathOpValIDOpStringNameTargetLocHideFormOptionToolPathScopeLayerToolsStrDataVarHideIDNameValIdentToolsRefStrModDirFormIdModOpHideStrTargetNameStringDataNameVarPathSystemCloseOptionsOpToolsDataHideStrFormIdVarOpFormRefFormIDToolsIdOpValVar) {
+            document.getElementById(domModalReferenceToHideStyleNameValIdentScopeVarLocSysHideNameOpParamIdOpCloseNameDataIdentReferenceTargetCloseFormValLocStringDOMReferenceOpNameVarSelectParamNameIDOpFormToolDirStrSelectorIdentTargetLayerToHidesystemOpObjToolsConfigFormStrPathOpValIDOpStringNameTargetLocHideFormOptionToolPathScopeLayerToolsStrDataVarHideIDNameValIdentToolsRefStrModDirFormIdModOpHideStrTargetNameStringDataNameVarPathSystemCloseOptionsOpToolsDataHideStrFormIdVarOpFormRefFormIDToolsIdOpValVar).style.display = 'none';
         }
         function doLogin() {
-            // Validate password credentials combinations logic conditions from manual rule definitions limits specifications requested checks matching test rule validation
-            let usrVarSystemValAuthValueCheckObjUserAuthCredFieldIdRefRawValue = document.getElementById('inp-id').value;
-            let pwdVarSystemValAuthValueCheckObjPasswordAuthCredFieldPasswdRefRawValueVarVarRawSysPassAuthCredTextDataInput = document.getElementById('inp-pass').value;
+            let uInputLogValIdentScopeParamLogCheckIDValCredToolParamHostVarConfigVal= document.getElementById('inp-id').value;
+            let passStrCredTestSecurityValidationLogVerifyScopeExecPassHostSysInputSysParamKeyAuthData = document.getElementById('inp-pass').value;
 
-            if(usrVarSystemValAuthValueCheckObjUserAuthCredFieldIdRefRawValue.trim() === 'rahe6799' && pwdVarSystemValAuthValueCheckObjPasswordAuthCredFieldPasswdRefRawValueVarVarRawSysPassAuthCredTextDataInput === 'jain9119') {
+            if(uInputLogValIdentScopeParamLogCheckIDValCredToolParamHostVarConfigVal.trim() === 'rahe6799' && passStrCredTestSecurityValidationLogVerifyScopeExecPassHostSysInputSysParamKeyAuthData === 'jain9119') {
                  sessionStorage.setItem("loggedInCMSHost", "y");
                  closeModal('modal-login');
                  activateHostMode();
                  document.getElementById('inp-pass').value = '';
                  document.getElementById('inp-id').value = '';
-            } else { alert("Warning! Unrecognized Host Identification Authorization Invalid Denied System Rule Refusal Creds Bad Reject Warning System."); }
+            } else { alert("Warning! Security check rules refused action!"); }
         }
         function activateHostMode() {
             hostAuthorized = true;
             document.getElementById('admin-panel').classList.remove('hidden');
             document.getElementById('btn-login-open').classList.add('hidden');
             document.getElementById('btn-logout').classList.remove('hidden');
-            loadUiNodeCurrentPageLevelView(); // Re-paint items showing admin hidden keys toolbar overlays! 
+            loadUiNodeCurrentPageLevelView(); 
         }
         function logout() {
             hostAuthorized = false;
@@ -498,16 +559,101 @@
             document.getElementById('btn-logout').classList.add('hidden');
             loadUiNodeCurrentPageLevelView();
         }
-        /* --- HOST CREATION EDITOR MANAGEMENT INTERFACE TOOL SUITE SYSTEM METHOD ---- */
 
+
+        // SEARCH FILTRATION SYSTEM INSIDE "MOVE" MODAL MENU FORM DROP LIST!
+        function filterMoveLocs() {
+            let userTermExt = document.getElementById('move-search-filter').value.toLowerCase();
+            let directoryOptTargetElementOptsListLayerScopeList = document.getElementById('move-destination-picker-list').options;
+            for(let scanPointFilterSystemCounterToolOptScopeMapSys = 0; scanPointFilterSystemCounterToolOptScopeMapSys < directoryOptTargetElementOptsListLayerScopeList.length; scanPointFilterSystemCounterToolOptScopeMapSys++) {
+                let listObjectCheckFilterCurrentRefDOMValIterOptionTextContentFormatVarStrTargetRefDataStrContextItem = directoryOptTargetElementOptsListLayerScopeList[scanPointFilterSystemCounterToolOptScopeMapSys];
+                if(listObjectCheckFilterCurrentRefDOMValIterOptionTextContentFormatVarStrTargetRefDataStrContextItem.text.toLowerCase().includes(userTermExt)) {
+                    listObjectCheckFilterCurrentRefDOMValIterOptionTextContentFormatVarStrTargetRefDataStrContextItem.style.display = '';
+                    listObjectCheckFilterCurrentRefDOMValIterOptionTextContentFormatVarStrTargetRefDataStrContextItem.hidden = false;
+                } else {
+                    listObjectCheckFilterCurrentRefDOMValIterOptionTextContentFormatVarStrTargetRefDataStrContextItem.style.display = 'none';
+                    listObjectCheckFilterCurrentRefDOMValIterOptionTextContentFormatVarStrTargetRefDataStrContextItem.hidden = true;
+                }
+            }
+        }
+
+        // Initialize Transfer Map
+        function executeItemMoveSequenceToTransferOperationLocationSystemAction(moveElementIdSelectorContextDirPathRefLocationTrackerCurrentObjectNodeToTransportLocExtractionSysVarModDataTargetScopeVarTargetExt) {
+            window.tempVarIdToTransferFolderLocDataConfigCurrentVarLoc = moveElementIdSelectorContextDirPathRefLocationTrackerCurrentObjectNodeToTransportLocExtractionSysVarModDataTargetScopeVarTargetExt;
+            
+            // Wipe UI previous search parameters !
+            document.getElementById('move-search-filter').value = '';
+
+            const dropdownSelectorListDomScopeListRefHTMLDomReferenceRootOptLocGeneratorGenRefMenuDomMap = document.getElementById('move-destination-picker-list');
+            dropdownSelectorListDomScopeListRefHTMLDomReferenceRootOptLocGeneratorGenRefMenuDomMap.innerHTML = '';
+            
+            // Recursively generate map
+            function treeBuilderMapper(folderTargetReferenceTargetNodeExtractCurrentScopeTargetBranchSysList, mappingStringTrailDirParentTrackerNavFormatTreeScopeReferencePrefixLocation) {
+                  // Ignore inserting loop nested on its own items! Safety logic drop prevention check override condition mapping ! 
+                  if (folderTargetReferenceTargetNodeExtractCurrentScopeTargetBranchSysList.id === window.tempVarIdToTransferFolderLocDataConfigCurrentVarLoc) return; 
+
+                  let mapPathTextFormatFullNavBreadSystemPathTreeBuilderToolFormat = mappingStringTrailDirParentTrackerNavFormatTreeScopeReferencePrefixLocation ? (mappingStringTrailDirParentTrackerNavFormatTreeScopeReferencePrefixLocation + " > " + folderTargetReferenceTargetNodeExtractCurrentScopeTargetBranchSysList.title) : folderTargetReferenceTargetNodeExtractCurrentScopeTargetBranchSysList.title;
+
+                  let formOptTargetSystemReferenceHtmlObjTargetRootHTMLDocOptValueMapLocExtSystemSelect = document.createElement("option");
+                  formOptTargetSystemReferenceHtmlObjTargetRootHTMLDocOptValueMapLocExtSystemSelect.value = folderTargetReferenceTargetNodeExtractCurrentScopeTargetBranchSysList.id;
+                  formOptTargetSystemReferenceHtmlObjTargetRootHTMLDocOptValueMapLocExtSystemSelect.text = "🗂️ " + mapPathTextFormatFullNavBreadSystemPathTreeBuilderToolFormat;
+                  dropdownSelectorListDomScopeListRefHTMLDomReferenceRootOptLocGeneratorGenRefMenuDomMap.appendChild(formOptTargetSystemReferenceHtmlObjTargetRootHTMLDocOptValueMapLocExtSystemSelect);
+
+                  // Extract children mappings config arrays iteration function routes route setup loc option tools map option path list system file object target
+                  if (folderTargetReferenceTargetNodeExtractCurrentScopeTargetBranchSysList.children){
+                       folderTargetReferenceTargetNodeExtractCurrentScopeTargetBranchSysList.children.forEach( refChildrenMappingSysIterator => {
+                           treeBuilderMapper(refChildrenMappingSysIterator, mapPathTextFormatFullNavBreadSystemPathTreeBuilderToolFormat);
+                       });
+                  }
+            }
+            
+            treeBuilderMapper(dbData, "");
+            
+            document.getElementById('modal-move-folder-loc').style.display = 'flex';
+        }
+
+        // Complete shift procedure database changes sync transfer node setup
+        function executeCommitConfirmationForNodeTransportationToNewLocationSystemUpdateRoutineMethodStateTransferOperationExecutionLogicConfirmOperationFunctionStoreOpSaveCallConfigToolActionRunConfirmRunDrop(){
+            let listOptionPathSystemDestinationTargetMenuDropDownTargetHTMLDataIDIdentifierExtractorSelectionTargetIdStringSelectionToolsLocatorMapMethodLocConfigValueLocPathSystemDrop= document.getElementById('move-destination-picker-list').value;
+            if(!listOptionPathSystemDestinationTargetMenuDropDownTargetHTMLDataIDIdentifierExtractorSelectionTargetIdStringSelectionToolsLocatorMapMethodLocConfigValueLocPathSystemDrop){
+                 alert("Warning! Select folder directory route!"); return;
+            }
+            
+            let systemHostDataFolderTargetRefWhereNodeElementTargetParentNavDirSourceIdScopeDirCurrentSystemLocationIdentifierRefLayerActivePathNodeRefTreeExtValLocatorToolsDropTargetListRouteSource= navigationHistory[navigationHistory.length-1];
+            if(listOptionPathSystemDestinationTargetMenuDropDownTargetHTMLDataIDIdentifierExtractorSelectionTargetIdStringSelectionToolsLocatorMapMethodLocConfigValueLocPathSystemDrop === systemHostDataFolderTargetRefWhereNodeElementTargetParentNavDirSourceIdScopeDirCurrentSystemLocationIdentifierRefLayerActivePathNodeRefTreeExtValLocatorToolsDropTargetListRouteSource){
+                 alert("Duplicate selection path action fault location same route overlap folder !"); 
+                 return;
+            }
+
+            // Current holder references array slice procedure extraction logic setup remove config array 
+            let folderMapHolderCurrentLocationTargetLayerDropToolsConfigSystemRouteValTrackerDirMap = scanIDNodeSystem(dbData, systemHostDataFolderTargetRefWhereNodeElementTargetParentNavDirSourceIdScopeDirCurrentSystemLocationIdentifierRefLayerActivePathNodeRefTreeExtValLocatorToolsDropTargetListRouteSource);
+
+            let bufferNodeHolderObjReferenceMatchSourceArrScopeIntTargetLocationNumPosReferenceTargetFinderVarArrayPositionIntExtIdLocFindDropListRouteMapMethodMoverLookupIntTargetOpMod = folderMapHolderCurrentLocationTargetLayerDropToolsConfigSystemRouteValTrackerDirMap.children.findIndex(x=>x.id===window.tempVarIdToTransferFolderLocDataConfigCurrentVarLoc);
+            
+            if(bufferNodeHolderObjReferenceMatchSourceArrScopeIntTargetLocationNumPosReferenceTargetFinderVarArrayPositionIntExtIdLocFindDropListRouteMapMethodMoverLookupIntTargetOpMod === -1){
+                alert("Extraction mismatch failure directory find path list fault error node operation route abort operation path directory."); return;
+            }
+            
+            let sourceRemovedDataElementToTransferPushReferenceHoldVarToolsMapMoverStoreTempNodeDrop = folderMapHolderCurrentLocationTargetLayerDropToolsConfigSystemRouteValTrackerDirMap.children.splice(bufferNodeHolderObjReferenceMatchSourceArrScopeIntTargetLocationNumPosReferenceTargetFinderVarArrayPositionIntExtIdLocFindDropListRouteMapMethodMoverLookupIntTargetOpMod, 1);
+            let dropDestPushPathExtractorSetupReferenceToolsPushTransferLayerDropOperationsModConfigActionMethodSystemDropNode= scanIDNodeSystem(dbData, listOptionPathSystemDestinationTargetMenuDropDownTargetHTMLDataIDIdentifierExtractorSelectionTargetIdStringSelectionToolsLocatorMapMethodLocConfigValueLocPathSystemDrop);
+
+            dropDestPushPathExtractorSetupReferenceToolsPushTransferLayerDropOperationsModConfigActionMethodSystemDropNode.children.push(sourceRemovedDataElementToTransferPushReferenceHoldVarToolsMapMoverStoreTempNodeDrop[0]);
+
+            saveStore();
+            closeModal('modal-move-folder-loc');
+        }
+
+
+
+        /* --- HOST CREATION EDITOR --- */
         function adjustEditForm() {
-             let selectionRuleModeSelectorOptSwitchUiMenuFieldSystemChoiceObjVarModeSystemSettingRuleSettingOptionValueFormatLayoutTextValSelStr = document.getElementById('item-type').value;
-             document.getElementById('fields-img').className = (selectionRuleModeSelectorOptSwitchUiMenuFieldSystemChoiceObjVarModeSystemSettingRuleSettingOptionValueFormatLayoutTextValSelStr==='image')?'':'hidden';
-             document.getElementById('fields-contact').className = (selectionRuleModeSelectorOptSwitchUiMenuFieldSystemChoiceObjVarModeSystemSettingRuleSettingOptionValueFormatLayoutTextValSelStr==='contact')?'':'hidden';
+             let selectionModeOptionsToolSetExt= document.getElementById('item-type').value;
+             document.getElementById('fields-img').className = (selectionModeOptionsToolSetExt==='image')?'':'hidden';
+             document.getElementById('fields-contact').className = (selectionModeOptionsToolSetExt==='contact')?'':'hidden';
         }
         
         function openCreateModal() {
-             document.getElementById('form-header-title').innerText = "Create Layout Form Obj Add Setup Action Set Command Configuration Build Generator Rule Operation Create Action Set Option Setting Execute"; // It translates essentially meaning Setup Builder Add tool ! 
+             document.getElementById('form-header-title').innerText = "Create New Setup Tools Box"; 
              document.getElementById('item-id').value = "";
              document.getElementById('item-title').value = "";
              document.getElementById('item-type').value = "text";
@@ -520,124 +666,113 @@
              document.getElementById('modal-edit').style.display='flex';
         }
 
-        // Activates specific content tool parameter window modifications settings form screen display setup parameters configurations interface variables injection logic run operation setup
-        function activateModifyObjValuesLevelMenuOpenerToolBoxFormConfigMethodActionFunctionExecuteMethodModifierLoaderExecutionMethodTargetSysLayerRefTargetDataConfigCall(taridstrdata){
-             const currentlyInsideBranchObjReferenceLocTreeRootArrVarArrayPointerContextLayerLookObjectPointerScopeDataPointParentNodeContextDataSysStateTreeNodeSystemObjectLookupReturnFoundNodeMatchPointScopeCurrentReferenceToUpdateAndModifyEditConfigurationSystem = scanIDNodeSystem(dbData, taridstrdata);
+        function activateModifyObjValuesLevelMenuOpenerToolBoxFormConfigMethodActionFunctionExecuteMethodModifierLoaderExecutionMethodTargetSysLayerRefTargetDataConfigCall(idIdentStrReferenceValueModExtStringSysLocToolOptionsSystemSetValIdentifierIdObj){
+             const extractionReferenceSettingsContextNodeCurrentObjectTargetFormValueExtractDataSystemVal = scanIDNodeSystem(dbData, idIdentStrReferenceValueModExtStringSysLocToolOptionsSystemSetValIdentifierIdObj);
              
-             document.getElementById('form-header-title').innerText = "Adjust Content Element Set Configuration Tool Data Updater Modify Setting Interface System"; 
-             document.getElementById('item-id').value = currentlyInsideBranchObjReferenceLocTreeRootArrVarArrayPointerContextLayerLookObjectPointerScopeDataPointParentNodeContextDataSysStateTreeNodeSystemObjectLookupReturnFoundNodeMatchPointScopeCurrentReferenceToUpdateAndModifyEditConfigurationSystem.id; 
-             document.getElementById('item-type').value = currentlyInsideBranchObjReferenceLocTreeRootArrVarArrayPointerContextLayerLookObjectPointerScopeDataPointParentNodeContextDataSysStateTreeNodeSystemObjectLookupReturnFoundNodeMatchPointScopeCurrentReferenceToUpdateAndModifyEditConfigurationSystem.type;
-             document.getElementById('item-title').value = currentlyInsideBranchObjReferenceLocTreeRootArrVarArrayPointerContextLayerLookObjectPointerScopeDataPointParentNodeContextDataSysStateTreeNodeSystemObjectLookupReturnFoundNodeMatchPointScopeCurrentReferenceToUpdateAndModifyEditConfigurationSystem.title || '';
+             document.getElementById('form-header-title').innerText = "Adjust Set Ext Option Update Setup Mod"; 
+             document.getElementById('item-id').value = extractionReferenceSettingsContextNodeCurrentObjectTargetFormValueExtractDataSystemVal.id; 
+             document.getElementById('item-type').value = extractionReferenceSettingsContextNodeCurrentObjectTargetFormValueExtractDataSystemVal.type;
+             document.getElementById('item-title').value = extractionReferenceSettingsContextNodeCurrentObjectTargetFormValueExtractDataSystemVal.title || '';
              
-             // Extract context data specifically map parameters specific 
-             document.getElementById('item-img').value = currentlyInsideBranchObjReferenceLocTreeRootArrVarArrayPointerContextLayerLookObjectPointerScopeDataPointParentNodeContextDataSysStateTreeNodeSystemObjectLookupReturnFoundNodeMatchPointScopeCurrentReferenceToUpdateAndModifyEditConfigurationSystem.type === 'image'? currentlyInsideBranchObjReferenceLocTreeRootArrVarArrayPointerContextLayerLookObjectPointerScopeDataPointParentNodeContextDataSysStateTreeNodeSystemObjectLookupReturnFoundNodeMatchPointScopeCurrentReferenceToUpdateAndModifyEditConfigurationSystem.imgSrc : '';
-             document.getElementById('item-prof-img').value = currentlyInsideBranchObjReferenceLocTreeRootArrVarArrayPointerContextLayerLookObjectPointerScopeDataPointParentNodeContextDataSysStateTreeNodeSystemObjectLookupReturnFoundNodeMatchPointScopeCurrentReferenceToUpdateAndModifyEditConfigurationSystem.type === 'contact'? currentlyInsideBranchObjReferenceLocTreeRootArrVarArrayPointerContextLayerLookObjectPointerScopeDataPointParentNodeContextDataSysStateTreeNodeSystemObjectLookupReturnFoundNodeMatchPointScopeCurrentReferenceToUpdateAndModifyEditConfigurationSystem.imgSrc: '';
-             document.getElementById('item-phone').value = currentlyInsideBranchObjReferenceLocTreeRootArrVarArrayPointerContextLayerLookObjectPointerScopeDataPointParentNodeContextDataSysStateTreeNodeSystemObjectLookupReturnFoundNodeMatchPointScopeCurrentReferenceToUpdateAndModifyEditConfigurationSystem.phone || '';
-             document.getElementById('item-web').value = currentlyInsideBranchObjReferenceLocTreeRootArrVarArrayPointerContextLayerLookObjectPointerScopeDataPointParentNodeContextDataSysStateTreeNodeSystemObjectLookupReturnFoundNodeMatchPointScopeCurrentReferenceToUpdateAndModifyEditConfigurationSystem.websiteLink || '';
-             document.getElementById('item-map').value = currentlyInsideBranchObjReferenceLocTreeRootArrVarArrayPointerContextLayerLookObjectPointerScopeDataPointParentNodeContextDataSysStateTreeNodeSystemObjectLookupReturnFoundNodeMatchPointScopeCurrentReferenceToUpdateAndModifyEditConfigurationSystem.locationDesc || '';
+             document.getElementById('item-img').value = extractionReferenceSettingsContextNodeCurrentObjectTargetFormValueExtractDataSystemVal.type === 'image'? extractionReferenceSettingsContextNodeCurrentObjectTargetFormValueExtractDataSystemVal.imgSrc : '';
+             document.getElementById('item-prof-img').value = extractionReferenceSettingsContextNodeCurrentObjectTargetFormValueExtractDataSystemVal.type === 'contact'? extractionReferenceSettingsContextNodeCurrentObjectTargetFormValueExtractDataSystemVal.imgSrc: '';
+             document.getElementById('item-phone').value = extractionReferenceSettingsContextNodeCurrentObjectTargetFormValueExtractDataSystemVal.phone || '';
+             document.getElementById('item-web').value = extractionReferenceSettingsContextNodeCurrentObjectTargetFormValueExtractDataSystemVal.websiteLink || '';
+             document.getElementById('item-map').value = extractionReferenceSettingsContextNodeCurrentObjectTargetFormValueExtractDataSystemVal.locationDesc || '';
 
              adjustEditForm();
              document.getElementById('modal-edit').style.display='flex';
         }
         
         function saveEditData() {
-            let layoutSelectorCurrentUiMenuSystemParamFormatToolSettingsStrStateSelectorTypeFormatReferenceTypeRuleDefDataTypeSettingVarObjParamRefChoiceSelValStrTextSetting = document.getElementById('item-type').value;
-            let currentOpenEditingContextRootDataPathIdentVariableCurrentFolderIDLayerIDSystemLocatorStringRefWhereValActiveCurrentlyCurrentDirIdKeyActiveParamContextLocationLocatorPointerLayerRootNodePathLayerNavLocationActiveStringScopeLocatorDirIDLayer = navigationHistory[navigationHistory.length-1]; 
-            let nodeLayerBranchReferentialPointerExtractedContextVariableLocObjStateContextSystemPathArrayFindRootBaseLookMatchLogicScanCurrentTreeScopeRefObjectNavTargetFoundNodeForPushLocSysDataParamSetRootContextPointerPointCurrentCurrentScope = scanIDNodeSystem(dbData, currentOpenEditingContextRootDataPathIdentVariableCurrentFolderIDLayerIDSystemLocatorStringRefWhereValActiveCurrentlyCurrentDirIdKeyActiveParamContextLocationLocatorPointerLayerRootNodePathLayerNavLocationActiveStringScopeLocatorDirIDLayer);
+            let configTargetSelectOptionContextReferenceSetMod= document.getElementById('item-type').value;
+            let currentOpenEditingContextRootDataPathFolderSetupIdentNavIdentifierStringPathIdStrContextLayer = navigationHistory[navigationHistory.length-1]; 
+            let arrayContextListFolderPushLocationContextOpTargetVarSetupNodeBaseSetupMapSystem = scanIDNodeSystem(dbData, currentOpenEditingContextRootDataPathFolderSetupIdentNavIdentifierStringPathIdStrContextLayer);
 
-            let uniqueModificationConfigVariableActionToSystemStateEditingIdentifierValToolLogicKeyHiddenFlagInputVarDataPointerIDForActionConfigUpdateStringValueRefId = document.getElementById('item-id').value;
+            let hasExistEditIdentityKeySystemToolModFlagActionCheckSystemObjEditIdVarUpdateExtSetToolSysOptIDTargetKeyStrIDIdentifierUpdateTarget = document.getElementById('item-id').value;
 
-            // Gather standardized shared general element layout variables inputs basic common parameters base info! 
-            let objectDataBuildingConfigSetStructPayloadContainerMapDefStructVarsNewUpdateDataConstructVariablesGroupParamMappingTemplateRuleConstructStateNewModelGenVarsUpdateObjectObj = {
+            let modDataToolSetupContextMapExtSetupParamMapNewConfigSystemOptionSetObjMapDataSetupModOptionsDataStructVarFormFormatSetupObj= {
                 title: document.getElementById('item-title').value,
-                type: layoutSelectorCurrentUiMenuSystemParamFormatToolSettingsStrStateSelectorTypeFormatReferenceTypeRuleDefDataTypeSettingVarObjParamRefChoiceSelValStrTextSetting
+                type: configTargetSelectOptionContextReferenceSetMod
             };
 
-            // Switch rule type conditionals specifics data! Check which rules branches active rules mappings! Data append definitions configurations bindings! 
-            if(layoutSelectorCurrentUiMenuSystemParamFormatToolSettingsStrStateSelectorTypeFormatReferenceTypeRuleDefDataTypeSettingVarObjParamRefChoiceSelValStrTextSetting === 'image') {
-                 objectDataBuildingConfigSetStructPayloadContainerMapDefStructVarsNewUpdateDataConstructVariablesGroupParamMappingTemplateRuleConstructStateNewModelGenVarsUpdateObjectObj.imgSrc = document.getElementById('item-img').value;
-            } else if(layoutSelectorCurrentUiMenuSystemParamFormatToolSettingsStrStateSelectorTypeFormatReferenceTypeRuleDefDataTypeSettingVarObjParamRefChoiceSelValStrTextSetting === 'contact') {
-                 objectDataBuildingConfigSetStructPayloadContainerMapDefStructVarsNewUpdateDataConstructVariablesGroupParamMappingTemplateRuleConstructStateNewModelGenVarsUpdateObjectObj.imgSrc = document.getElementById('item-prof-img').value;
-                 objectDataBuildingConfigSetStructPayloadContainerMapDefStructVarsNewUpdateDataConstructVariablesGroupParamMappingTemplateRuleConstructStateNewModelGenVarsUpdateObjectObj.phone = document.getElementById('item-phone').value;
-                 objectDataBuildingConfigSetStructPayloadContainerMapDefStructVarsNewUpdateDataConstructVariablesGroupParamMappingTemplateRuleConstructStateNewModelGenVarsUpdateObjectObj.websiteLink = document.getElementById('item-web').value;
-                 objectDataBuildingConfigSetStructPayloadContainerMapDefStructVarsNewUpdateDataConstructVariablesGroupParamMappingTemplateRuleConstructStateNewModelGenVarsUpdateObjectObj.locationDesc = document.getElementById('item-map').value;
+            if(configTargetSelectOptionContextReferenceSetMod === 'image') {
+                 modDataToolSetupContextMapExtSetupParamMapNewConfigSystemOptionSetObjMapDataSetupModOptionsDataStructVarFormFormatSetupObj.imgSrc = document.getElementById('item-img').value;
+            } else if(configTargetSelectOptionContextReferenceSetMod === 'contact') {
+                 modDataToolSetupContextMapExtSetupParamMapNewConfigSystemOptionSetObjMapDataSetupModOptionsDataStructVarFormFormatSetupObj.imgSrc = document.getElementById('item-prof-img').value;
+                 modDataToolSetupContextMapExtSetupParamMapNewConfigSystemOptionSetObjMapDataSetupModOptionsDataStructVarFormFormatSetupObj.phone = document.getElementById('item-phone').value;
+                 modDataToolSetupContextMapExtSetupParamMapNewConfigSystemOptionSetObjMapDataSetupModOptionsDataStructVarFormFormatSetupObj.websiteLink = document.getElementById('item-web').value;
+                 modDataToolSetupContextMapExtSetupParamMapNewConfigSystemOptionSetObjMapDataSetupModOptionsDataStructVarFormFormatSetupObj.locationDesc = document.getElementById('item-map').value;
             }
 
-            if(uniqueModificationConfigVariableActionToSystemStateEditingIdentifierValToolLogicKeyHiddenFlagInputVarDataPointerIDForActionConfigUpdateStringValueRefId) { // Has exist ident key therefore Update ! (Editing Command Flow Route Process) 
-                let locSystemEditTargetExtractionObjectPointSystemExtractedTargetReferntDataPointLocVariablePointerRefExtractedVarObjReferenceUpdate = scanIDNodeSystem(dbData, uniqueModificationConfigVariableActionToSystemStateEditingIdentifierValToolLogicKeyHiddenFlagInputVarDataPointerIDForActionConfigUpdateStringValueRefId); 
-                locSystemEditTargetExtractionObjectPointSystemExtractedTargetReferntDataPointLocVariablePointerRefExtractedVarObjReferenceUpdate.title = objectDataBuildingConfigSetStructPayloadContainerMapDefStructVarsNewUpdateDataConstructVariablesGroupParamMappingTemplateRuleConstructStateNewModelGenVarsUpdateObjectObj.title;
-                locSystemEditTargetExtractionObjectPointSystemExtractedTargetReferntDataPointLocVariablePointerRefExtractedVarObjReferenceUpdate.type = objectDataBuildingConfigSetStructPayloadContainerMapDefStructVarsNewUpdateDataConstructVariablesGroupParamMappingTemplateRuleConstructStateNewModelGenVarsUpdateObjectObj.type;
-                locSystemEditTargetExtractionObjectPointSystemExtractedTargetReferntDataPointLocVariablePointerRefExtractedVarObjReferenceUpdate.imgSrc = objectDataBuildingConfigSetStructPayloadContainerMapDefStructVarsNewUpdateDataConstructVariablesGroupParamMappingTemplateRuleConstructStateNewModelGenVarsUpdateObjectObj.imgSrc;
-                locSystemEditTargetExtractionObjectPointSystemExtractedTargetReferntDataPointLocVariablePointerRefExtractedVarObjReferenceUpdate.phone = objectDataBuildingConfigSetStructPayloadContainerMapDefStructVarsNewUpdateDataConstructVariablesGroupParamMappingTemplateRuleConstructStateNewModelGenVarsUpdateObjectObj.phone;
-                locSystemEditTargetExtractionObjectPointSystemExtractedTargetReferntDataPointLocVariablePointerRefExtractedVarObjReferenceUpdate.websiteLink = objectDataBuildingConfigSetStructPayloadContainerMapDefStructVarsNewUpdateDataConstructVariablesGroupParamMappingTemplateRuleConstructStateNewModelGenVarsUpdateObjectObj.websiteLink;
-                locSystemEditTargetExtractionObjectPointSystemExtractedTargetReferntDataPointLocVariablePointerRefExtractedVarObjReferenceUpdate.locationDesc = objectDataBuildingConfigSetStructPayloadContainerMapDefStructVarsNewUpdateDataConstructVariablesGroupParamMappingTemplateRuleConstructStateNewModelGenVarsUpdateObjectObj.locationDesc;
-            } else { // Blank ID = Create Rule Builder Trigger Appending Append Command Sequence Operation System Generation Command Data Generator Call Operation Generation Tool Run Insert Insert Command Process Push Data Create Execution Push Call ! 
-                objectDataBuildingConfigSetStructPayloadContainerMapDefStructVarsNewUpdateDataConstructVariablesGroupParamMappingTemplateRuleConstructStateNewModelGenVarsUpdateObjectObj.id = "sys_entry_" + Date.now();
-                objectDataBuildingConfigSetStructPayloadContainerMapDefStructVarsNewUpdateDataConstructVariablesGroupParamMappingTemplateRuleConstructStateNewModelGenVarsUpdateObjectObj.hidden = false;
-                objectDataBuildingConfigSetStructPayloadContainerMapDefStructVarsNewUpdateDataConstructVariablesGroupParamMappingTemplateRuleConstructStateNewModelGenVarsUpdateObjectObj.children =[];
-                nodeLayerBranchReferentialPointerExtractedContextVariableLocObjStateContextSystemPathArrayFindRootBaseLookMatchLogicScanCurrentTreeScopeRefObjectNavTargetFoundNodeForPushLocSysDataParamSetRootContextPointerPointCurrentCurrentScope.children.push(objectDataBuildingConfigSetStructPayloadContainerMapDefStructVarsNewUpdateDataConstructVariablesGroupParamMappingTemplateRuleConstructStateNewModelGenVarsUpdateObjectObj);
+            if(hasExistEditIdentityKeySystemToolModFlagActionCheckSystemObjEditIdVarUpdateExtSetToolSysOptIDTargetKeyStrIDIdentifierUpdateTarget) { 
+                let sysExtractionLocationTargetExtSetOpRefTargetUpdateExtLayerValContextTargetTargetObjNodeSysIdentExtSet = scanIDNodeSystem(dbData, hasExistEditIdentityKeySystemToolModFlagActionCheckSystemObjEditIdVarUpdateExtSetToolSysOptIDTargetKeyStrIDIdentifierUpdateTarget); 
+                sysExtractionLocationTargetExtSetOpRefTargetUpdateExtLayerValContextTargetTargetObjNodeSysIdentExtSet.title = modDataToolSetupContextMapExtSetupParamMapNewConfigSystemOptionSetObjMapDataSetupModOptionsDataStructVarFormFormatSetupObj.title;
+                sysExtractionLocationTargetExtSetOpRefTargetUpdateExtLayerValContextTargetTargetObjNodeSysIdentExtSet.type = modDataToolSetupContextMapExtSetupParamMapNewConfigSystemOptionSetObjMapDataSetupModOptionsDataStructVarFormFormatSetupObj.type;
+                sysExtractionLocationTargetExtSetOpRefTargetUpdateExtLayerValContextTargetTargetObjNodeSysIdentExtSet.imgSrc = modDataToolSetupContextMapExtSetupParamMapNewConfigSystemOptionSetObjMapDataSetupModOptionsDataStructVarFormFormatSetupObj.imgSrc;
+                sysExtractionLocationTargetExtSetOpRefTargetUpdateExtLayerValContextTargetTargetObjNodeSysIdentExtSet.phone = modDataToolSetupContextMapExtSetupParamMapNewConfigSystemOptionSetObjMapDataSetupModOptionsDataStructVarFormFormatSetupObj.phone;
+                sysExtractionLocationTargetExtSetOpRefTargetUpdateExtLayerValContextTargetTargetObjNodeSysIdentExtSet.websiteLink = modDataToolSetupContextMapExtSetupParamMapNewConfigSystemOptionSetObjMapDataSetupModOptionsDataStructVarFormFormatSetupObj.websiteLink;
+                sysExtractionLocationTargetExtSetOpRefTargetUpdateExtLayerValContextTargetTargetObjNodeSysIdentExtSet.locationDesc = modDataToolSetupContextMapExtSetupParamMapNewConfigSystemOptionSetObjMapDataSetupModOptionsDataStructVarFormFormatSetupObj.locationDesc;
+            } else { 
+                modDataToolSetupContextMapExtSetupParamMapNewConfigSystemOptionSetObjMapDataSetupModOptionsDataStructVarFormFormatSetupObj.id = "sys_entry_" + Date.now();
+                modDataToolSetupContextMapExtSetupParamMapNewConfigSystemOptionSetObjMapDataSetupModOptionsDataStructVarFormFormatSetupObj.hidden = false;
+                modDataToolSetupContextMapExtSetupParamMapNewConfigSystemOptionSetObjMapDataSetupModOptionsDataStructVarFormFormatSetupObj.children =[];
+                arrayContextListFolderPushLocationContextOpTargetVarSetupNodeBaseSetupMapSystem.children.push(modDataToolSetupContextMapExtSetupParamMapNewConfigSystemOptionSetObjMapDataSetupModOptionsDataStructVarFormFormatSetupObj);
             }
 
             closeModal('modal-edit');
             saveStore();
         }
 
-
-        // Visibility Toggle Flag Setting Function System Overwrite Control Setting Visibility Modification Control Hide Option Update Param Set Config Switch Property Switch Hide Modify State Execute Visibility
-        function flipVisibleStatusStateParamForTargetLevelScopeItemFunctionRunParamSetUpdateObjectBoolSysChangeMod(arrIdxPointLoc) {
-            let systemCurrentBranchTargetDirectoryActiveCurrentIdParamIdentifierLayerNodeVarCurrentDataLayerActiveObjDirValContextRootRefObjScopeIdentifier = navigationHistory[navigationHistory.length-1];
-            let systemContextVariableRootFolderLookupExtractionRefObjectDirectoryVariableLayerTreeScopeLocatorDataLayerSysExtrapolatedObjReferenceNowLevelCurrentLookContextObjectNavObjectParentPointerScopeCurrentLayerHereContextHereRefTargetSysFolderNodeExt = scanIDNodeSystem(dbData, systemCurrentBranchTargetDirectoryActiveCurrentIdParamIdentifierLayerNodeVarCurrentDataLayerActiveObjDirValContextRootRefObjScopeIdentifier);
+        function flipVisibleStatusStateParamForTargetLevelScopeItemFunctionRunParamSetUpdateObjectBoolSysChangeMod(sysIdentCurrentNodeOptNumIntTargetArrIndexExtractionSystemLocReferenceArrayPosContextPosLayerArrayToolsExtIndexRefArrSysNumberIntIntParamSystemObjToolArrMapExtPosDataIntRefLocationRefSystemScopeObjTargetDataOpOptSystemLocationIntRefToolsModDirConfigDirMethodData) {
+            let activeNavigationLevelTargetObjSystemModToolsDataIdOpLocationIdIdentOptStrFolderNavModRouteLayerConfigModCurrentIdIdOptRefExtDirLoc = navigationHistory[navigationHistory.length-1];
+            let activeRefObjDirContextPathReferenceOptTreeSysMapLocationRefDataFolderOptionsContextMapObj = scanIDNodeSystem(dbData, activeNavigationLevelTargetObjSystemModToolsDataIdOpLocationIdIdentOptStrFolderNavModRouteLayerConfigModCurrentIdIdOptRefExtDirLoc);
             
-            // Flip invert status
-            systemContextVariableRootFolderLookupExtractionRefObjectDirectoryVariableLayerTreeScopeLocatorDataLayerSysExtrapolatedObjReferenceNowLevelCurrentLookContextObjectNavObjectParentPointerScopeCurrentLayerHereContextHereRefTargetSysFolderNodeExt.children[arrIdxPointLoc].hidden = !systemContextVariableRootFolderLookupExtractionRefObjectDirectoryVariableLayerTreeScopeLocatorDataLayerSysExtrapolatedObjReferenceNowLevelCurrentLookContextObjectNavObjectParentPointerScopeCurrentLayerHereContextHereRefTargetSysFolderNodeExt.children[arrIdxPointLoc].hidden; 
+            activeRefObjDirContextPathReferenceOptTreeSysMapLocationRefDataFolderOptionsContextMapObj.children[sysIdentCurrentNodeOptNumIntTargetArrIndexExtractionSystemLocReferenceArrayPosContextPosLayerArrayToolsExtIndexRefArrSysNumberIntIntParamSystemObjToolArrMapExtPosDataIntRefLocationRefSystemScopeObjTargetDataOpOptSystemLocationIntRefToolsModDirConfigDirMethodData].hidden = !activeRefObjDirContextPathReferenceOptTreeSysMapLocationRefDataFolderOptionsContextMapObj.children[sysIdentCurrentNodeOptNumIntTargetArrIndexExtractionSystemLocReferenceArrayPosContextPosLayerArrayToolsExtIndexRefArrSysNumberIntIntParamSystemObjToolArrMapExtPosDataIntRefLocationRefSystemScopeObjTargetDataOpOptSystemLocationIntRefToolsModDirConfigDirMethodData].hidden; 
             saveStore();
         }
 
-        // Drop Bin Item Erase Command Control Action System
         function sliceDataDumpCompletelyLogicSystemDeleteParamRemoveEraseArrayNodeObjectMethodCallEraseToolOperationBinCommandExecution(deleteLocSystemIdxPosParamArrArrayPosLocRemovePointerIndexValNumPosDataLocIndexPointerReferenceIntNumIndexDataIntPointerSystemListTargetRemoveVal) {
              if(confirm("Action Rule Confirm Notice Warn Security Overwrite Rule Condition Are you strictly totally comprehensively permanently permanently definitely confirmed to wipe this out complete deletion execution rules rules confirm accept proceed notice check verification confirmation ? (Its infinite layers / chindren within structure included wipe) ")){
-                  let systemCurrentBranchTargetDirectoryActiveCurrentIdParamIdentifierLayerNodeVarCurrentDataLayerActiveObjDirValContextRootRefObjScopeIdentifierForDele = navigationHistory[navigationHistory.length-1];
-                  let contextObjDirectoryNavScopeExtractNodeFolderBaseDeleteToolLocPointerExtDataRefParentDeleteOperationReferenceObj = scanIDNodeSystem(dbData, systemCurrentBranchTargetDirectoryActiveCurrentIdParamIdentifierLayerNodeVarCurrentDataLayerActiveObjDirValContextRootRefObjScopeIdentifierForDele);
+                  let arrayPathDropIdRouteOptionIdLocReferenceSystemConfigToolsMapPathValExtSysVarStrSystemScopeLocationRouteData= navigationHistory[navigationHistory.length-1];
+                  let targetExtractionNodeReferenceToolsListObjDropArrayDataRouteDirSysDropConfigNodeContextVarContextDirectoryScopeArrayFolderLocPathVarExtMapTargetObjectReference = scanIDNodeSystem(dbData, arrayPathDropIdRouteOptionIdLocReferenceSystemConfigToolsMapPathValExtSysVarStrSystemScopeLocationRouteData);
                   
-                  contextObjDirectoryNavScopeExtractNodeFolderBaseDeleteToolLocPointerExtDataRefParentDeleteOperationReferenceObj.children.splice(deleteLocSystemIdxPosParamArrArrayPosLocRemovePointerIndexValNumPosDataLocIndexPointerReferenceIntNumIndexDataIntPointerSystemListTargetRemoveVal, 1);
+                  targetExtractionNodeReferenceToolsListObjDropArrayDataRouteDirSysDropConfigNodeContextVarContextDirectoryScopeArrayFolderLocPathVarExtMapTargetObjectReference.children.splice(deleteLocSystemIdxPosParamArrArrayPosLocRemovePointerIndexValNumPosDataLocIndexPointerReferenceIntNumIndexDataIntPointerSystemListTargetRemoveVal, 1);
                   saveStore();
              }
         }
 
-        /* Movement Swaps logic array implementations : shift up / down shifts all internal configs seamlessly array properties JS shift! */
-        function relocateSequenceValElemDownObjFunctionSysMoveValSystemLogicFlowMethodDirectionArrow(moveDataPointTargetArrayIdxElementIdxRefSwapOpSysDownArrIdPosDownListTargetIndexElementIntRefToNum) {
-            let actSysNavSystemBranchDirectorySystemIdentifierCurrentPointerStrIdentifierNavIDLayerValNavLocObjParentPointLayerIdentifierNavDirectoryContextNavExtSysStateNowIDSystemParentKeyNowNavTargetStrActiveCurrentLookIdentifierExtIDRefValDirNowIdentObjSysExtIdentPointFolderStrIdentKeyStrSysNavValParentLocContextStringValPointer = navigationHistory[navigationHistory.length-1];
-            let cCtxLayerNodeLookBranchDataReferenceLevelFolderExtractionNavLocLookScopeObjValTargetExtractionRefVarContextDirObjectDirPointerBranchDirNavTreePointerBaseTreeRootPointBaseTargetObjectNavRootSysTreeExtDataVarLookPointerLevelTargetObjBaseObjectTreeParentBranchContextLookupObjLevelLayer = scanIDNodeSystem(dbData, actSysNavSystemBranchDirectorySystemIdentifierCurrentPointerStrIdentifierNavIDLayerValNavLocObjParentPointLayerIdentifierNavDirectoryContextNavExtSysStateNowIDSystemParentKeyNowNavTargetStrActiveCurrentLookIdentifierExtIDRefValDirNowIdentObjSysExtIdentPointFolderStrIdentKeyStrSysNavValParentLocContextStringValPointer);
+        function relocateSequenceValElemDownObjFunctionSysMoveValSystemLogicFlowMethodDirectionArrow(moveSysDataSystemDropPosArrScopeLocationSystemMethodArrIndexMovePosRouteToolOptOpDirIndexListIndexMoveRouteMethodNumDataLocationIntSysPosDataRouteToolObjTargetArrayValIdxMapOptionsPosIntExtDropIntRouteToolSysIdxOptionsIntArrayPathExtDirVarDropIntPosIndexOptDataDropIndexToolsIntListDirExtToolPosNumInt) {
+            let opTargetLocationSysActivePathOptionsRefSysFolderValExtDirectoryVarMapMethodIdLocationSystemDirectoryExt = navigationHistory[navigationHistory.length-1];
+            let currentPathObjectLayerToolsSetupContextScopeDirListModTreeDirectoryPathValMapVarPathSystemOptionDataToolsScopeDirOpNode = scanIDNodeSystem(dbData, opTargetLocationSysActivePathOptionsRefSysFolderValExtDirectoryVarMapMethodIdLocationSystemDirectoryExt);
             
-            // Swap condition bounds 
-            if(moveDataPointTargetArrayIdxElementIdxRefSwapOpSysDownArrIdPosDownListTargetIndexElementIntRefToNum < cCtxLayerNodeLookBranchDataReferenceLevelFolderExtractionNavLocLookScopeObjValTargetExtractionRefVarContextDirObjectDirPointerBranchDirNavTreePointerBaseTreeRootPointBaseTargetObjectNavRootSysTreeExtDataVarLookPointerLevelTargetObjBaseObjectTreeParentBranchContextLookupObjLevelLayer.children.length - 1){
-                 let containerBufferSystemDataMemStorageBackupBufferTmpArrayElementRefDataHoldingVariableStoreBufferSystemElementStorage = cCtxLayerNodeLookBranchDataReferenceLevelFolderExtractionNavLocLookScopeObjValTargetExtractionRefVarContextDirObjectDirPointerBranchDirNavTreePointerBaseTreeRootPointBaseTargetObjectNavRootSysTreeExtDataVarLookPointerLevelTargetObjBaseObjectTreeParentBranchContextLookupObjLevelLayer.children[moveDataPointTargetArrayIdxElementIdxRefSwapOpSysDownArrIdPosDownListTargetIndexElementIntRefToNum];
-                 cCtxLayerNodeLookBranchDataReferenceLevelFolderExtractionNavLocLookScopeObjValTargetExtractionRefVarContextDirObjectDirPointerBranchDirNavTreePointerBaseTreeRootPointBaseTargetObjectNavRootSysTreeExtDataVarLookPointerLevelTargetObjBaseObjectTreeParentBranchContextLookupObjLevelLayer.children[moveDataPointTargetArrayIdxElementIdxRefSwapOpSysDownArrIdPosDownListTargetIndexElementIntRefToNum] = cCtxLayerNodeLookBranchDataReferenceLevelFolderExtractionNavLocLookScopeObjValTargetExtractionRefVarContextDirObjectDirPointerBranchDirNavTreePointerBaseTreeRootPointBaseTargetObjectNavRootSysTreeExtDataVarLookPointerLevelTargetObjBaseObjectTreeParentBranchContextLookupObjLevelLayer.children[moveDataPointTargetArrayIdxElementIdxRefSwapOpSysDownArrIdPosDownListTargetIndexElementIntRefToNum + 1];
-                 cCtxLayerNodeLookBranchDataReferenceLevelFolderExtractionNavLocLookScopeObjValTargetExtractionRefVarContextDirObjectDirPointerBranchDirNavTreePointerBaseTreeRootPointBaseTargetObjectNavRootSysTreeExtDataVarLookPointerLevelTargetObjBaseObjectTreeParentBranchContextLookupObjLevelLayer.children[moveDataPointTargetArrayIdxElementIdxRefSwapOpSysDownArrIdPosDownListTargetIndexElementIntRefToNum + 1] = containerBufferSystemDataMemStorageBackupBufferTmpArrayElementRefDataHoldingVariableStoreBufferSystemElementStorage;
-                 saveStore();
-            }
-        }
-        function relocateSequenceValElemUpObjFunctionSysMoveValSystemLogicFlowMethodDirectionArrow(moveDataPointTargetArrayIdxElementIdxRefSwapOpSysUpArrIdPosUpListTargetIndexElementIntRefToNum) {
-            let activeIdentDirPointSystemIdentifierKeyValLayerObjLocationTreeStateStringPointerSystemIDRootReferenceScopeContextObjIdTargetLevelContextSysFolderDataStringDirSystemLayerPointerStrActive = navigationHistory[navigationHistory.length-1];
-            let levelCurrentDirParentBranchDirDataNavReferenceContextTargetLookupRefSystemLevelContextNodeBranchTreeExtractedLayerLookupReferenceBaseNavLayerBaseSystemExtractionPointCurrentContextObjDirCurrentPointObjectLookExtractionSysRefTreeLevelVarObjectCurrent = scanIDNodeSystem(dbData, activeIdentDirPointSystemIdentifierKeyValLayerObjLocationTreeStateStringPointerSystemIDRootReferenceScopeContextObjIdTargetLevelContextSysFolderDataStringDirSystemLayerPointerStrActive);
-
-            // Conditional upper swap ceiling block rules implementations logic operation logic guard prevent undefined swap overwrite condition error break! 
-            if(moveDataPointTargetArrayIdxElementIdxRefSwapOpSysUpArrIdPosUpListTargetIndexElementIntRefToNum > 0){
-                 let buffTMPLayerContainerMemoryStorageRefObjectHolderStoreDataBackupContainerSysBufArraySysReferenceArrPosSysVarElementNodeElementValueDataSystemTempSwapElementMemoryDataStoreNodePointerContainerStorageStoreValueValElement = levelCurrentDirParentBranchDirDataNavReferenceContextTargetLookupRefSystemLevelContextNodeBranchTreeExtractedLayerLookupReferenceBaseNavLayerBaseSystemExtractionPointCurrentContextObjDirCurrentPointObjectLookExtractionSysRefTreeLevelVarObjectCurrent.children[moveDataPointTargetArrayIdxElementIdxRefSwapOpSysUpArrIdPosUpListTargetIndexElementIntRefToNum];
-                 levelCurrentDirParentBranchDirDataNavReferenceContextTargetLookupRefSystemLevelContextNodeBranchTreeExtractedLayerLookupReferenceBaseNavLayerBaseSystemExtractionPointCurrentContextObjDirCurrentPointObjectLookExtractionSysRefTreeLevelVarObjectCurrent.children[moveDataPointTargetArrayIdxElementIdxRefSwapOpSysUpArrIdPosUpListTargetIndexElementIntRefToNum] = levelCurrentDirParentBranchDirDataNavReferenceContextTargetLookupRefSystemLevelContextNodeBranchTreeExtractedLayerLookupReferenceBaseNavLayerBaseSystemExtractionPointCurrentContextObjDirCurrentPointObjectLookExtractionSysRefTreeLevelVarObjectCurrent.children[moveDataPointTargetArrayIdxElementIdxRefSwapOpSysUpArrIdPosUpListTargetIndexElementIntRefToNum - 1];
-                 levelCurrentDirParentBranchDirDataNavReferenceContextTargetLookupRefSystemLevelContextNodeBranchTreeExtractedLayerLookupReferenceBaseNavLayerBaseSystemExtractionPointCurrentContextObjDirCurrentPointObjectLookExtractionSysRefTreeLevelVarObjectCurrent.children[moveDataPointTargetArrayIdxElementIdxRefSwapOpSysUpArrIdPosUpListTargetIndexElementIntRefToNum - 1] = buffTMPLayerContainerMemoryStorageRefObjectHolderStoreDataBackupContainerSysBufArraySysReferenceArrPosSysVarElementNodeElementValueDataSystemTempSwapElementMemoryDataStoreNodePointerContainerStorageStoreValueValElement;
+            if(moveSysDataSystemDropPosArrScopeLocationSystemMethodArrIndexMovePosRouteToolOptOpDirIndexListIndexMoveRouteMethodNumDataLocationIntSysPosDataRouteToolObjTargetArrayValIdxMapOptionsPosIntExtDropIntRouteToolSysIdxOptionsIntArrayPathExtDirVarDropIntPosIndexOptDataDropIndexToolsIntListDirExtToolPosNumInt < currentPathObjectLayerToolsSetupContextScopeDirListModTreeDirectoryPathValMapVarPathSystemOptionDataToolsScopeDirOpNode.children.length - 1){
+                 let listDirArrTransferTargetNodeSysObjValMethodSystemModTempSystemStoreRoutePosReferenceTempBuffVarListContextSwapExtValObjToolSysTargetOptionsStoreDropDirOptionsPathOpToolVarToolsTempArrayDirObjMethod= currentPathObjectLayerToolsSetupContextScopeDirListModTreeDirectoryPathValMapVarPathSystemOptionDataToolsScopeDirOpNode.children[moveSysDataSystemDropPosArrScopeLocationSystemMethodArrIndexMovePosRouteToolOptOpDirIndexListIndexMoveRouteMethodNumDataLocationIntSysPosDataRouteToolObjTargetArrayValIdxMapOptionsPosIntExtDropIntRouteToolSysIdxOptionsIntArrayPathExtDirVarDropIntPosIndexOptDataDropIndexToolsIntListDirExtToolPosNumInt];
+                 currentPathObjectLayerToolsSetupContextScopeDirListModTreeDirectoryPathValMapVarPathSystemOptionDataToolsScopeDirOpNode.children[moveSysDataSystemDropPosArrScopeLocationSystemMethodArrIndexMovePosRouteToolOptOpDirIndexListIndexMoveRouteMethodNumDataLocationIntSysPosDataRouteToolObjTargetArrayValIdxMapOptionsPosIntExtDropIntRouteToolSysIdxOptionsIntArrayPathExtDirVarDropIntPosIndexOptDataDropIndexToolsIntListDirExtToolPosNumInt] = currentPathObjectLayerToolsSetupContextScopeDirListModTreeDirectoryPathValMapVarPathSystemOptionDataToolsScopeDirOpNode.children[moveSysDataSystemDropPosArrScopeLocationSystemMethodArrIndexMovePosRouteToolOptOpDirIndexListIndexMoveRouteMethodNumDataLocationIntSysPosDataRouteToolObjTargetArrayValIdxMapOptionsPosIntExtDropIntRouteToolSysIdxOptionsIntArrayPathExtDirVarDropIntPosIndexOptDataDropIndexToolsIntListDirExtToolPosNumInt + 1];
+                 currentPathObjectLayerToolsSetupContextScopeDirListModTreeDirectoryPathValMapVarPathSystemOptionDataToolsScopeDirOpNode.children[moveSysDataSystemDropPosArrScopeLocationSystemMethodArrIndexMovePosRouteToolOptOpDirIndexListIndexMoveRouteMethodNumDataLocationIntSysPosDataRouteToolObjTargetArrayValIdxMapOptionsPosIntExtDropIntRouteToolSysIdxOptionsIntArrayPathExtDirVarDropIntPosIndexOptDataDropIndexToolsIntListDirExtToolPosNumInt + 1] = listDirArrTransferTargetNodeSysObjValMethodSystemModTempSystemStoreRoutePosReferenceTempBuffVarListContextSwapExtValObjToolSysTargetOptionsStoreDropDirOptionsPathOpToolVarToolsTempArrayDirObjMethod;
                  saveStore();
             }
         }
 
-        // Tiny HTML sanitizer helper for titles text blocks displaying formats clean protection safe views system helper render !  
-        function escapeHTML(strSysArgInputRuleVarSanitizerRenderOperationTextValTargetArgValueArgTextProcessVarFilterObjData) {
-            let pSanityContainerVarDataProcessContainerRefVarObjectValHTMLElementBuildElementHTMLProcessSysDocContainerBuildComponentValSysDataObjTextOutputProcessDocDomHTMLFilterDomElemGenDOMGenDomVarPComponentDiv= document.createElement('div');
-            pSanityContainerVarDataProcessContainerRefVarObjectValHTMLElementBuildElementHTMLProcessSysDocContainerBuildComponentValSysDataObjTextOutputProcessDocDomHTMLFilterDomElemGenDOMGenDomVarPComponentDiv.innerText = strSysArgInputRuleVarSanitizerRenderOperationTextValTargetArgValueArgTextProcessVarFilterObjData;
-            return pSanityContainerVarDataProcessContainerRefVarObjectValHTMLElementBuildElementHTMLProcessSysDocContainerBuildComponentValSysDataObjTextOutputProcessDocDomHTMLFilterDomElemGenDOMGenDomVarPComponentDiv.innerHTML;
+        function relocateSequenceValElemUpObjFunctionSysMoveValSystemLogicFlowMethodDirectionArrow(shiftArraySysObjOpNodeValDataDropMethodIntSysMapNumIntIdxToolsMapOptionsDirDropMethodIdPathArrayRefSystemToolOptionsTargetLocIndexTargetDirToolArrayMapSysIdPosToolsDropValSysListValSystemOptionsMapToolOpToolsIntPosDropOpPathDropPosValTargetSysLocPathToolOptionsDropValIntIndexDirNumOptRouteIndexOpVal) {
+            let directoryPathSysMethodIdentifierScopeLayerToolsDropVarObjDirMapListDirTargetOpLocationSysIDVarOptDirectoryOptionsToolIDScope = navigationHistory[navigationHistory.length-1];
+            let listToolsFolderExtractOpTargetToolsDirectoryLocSysObjectArrayNodeMapRefMapTreeContextDirValDataDirMapDataObjScopeSysLocDirIdExtTools = scanIDNodeSystem(dbData, directoryPathSysMethodIdentifierScopeLayerToolsDropVarObjDirMapListDirTargetOpLocationSysIDVarOptDirectoryOptionsToolIDScope);
+
+            if(shiftArraySysObjOpNodeValDataDropMethodIntSysMapNumIntIdxToolsMapOptionsDirDropMethodIdPathArrayRefSystemToolOptionsTargetLocIndexTargetDirToolArrayMapSysIdPosToolsDropValSysListValSystemOptionsMapToolOpToolsIntPosDropOpPathDropPosValTargetSysLocPathToolOptionsDropValIntIndexDirNumOptRouteIndexOpVal > 0){
+                 let backupToolOptionSystemListBuffToolsModMethodTargetSystemDropRouteStorePosReferenceListToolMapRefNodeDataObjTempHoldDataTargetNodeDataTempToolsBuffSysNodeExtArrListOptionTransferDropMapToolDirSystemObjListToolsArrayPosVarReferenceObjTransferOpSysSwapPathTargetValRefDropSwapMethodToolRefOptionsTransferListDrop= listToolsFolderExtractOpTargetToolsDirectoryLocSysObjectArrayNodeMapRefMapTreeContextDirValDataDirMapDataObjScopeSysLocDirIdExtTools.children[shiftArraySysObjOpNodeValDataDropMethodIntSysMapNumIntIdxToolsMapOptionsDirDropMethodIdPathArrayRefSystemToolOptionsTargetLocIndexTargetDirToolArrayMapSysIdPosToolsDropValSysListValSystemOptionsMapToolOpToolsIntPosDropOpPathDropPosValTargetSysLocPathToolOptionsDropValIntIndexDirNumOptRouteIndexOpVal];
+                 listToolsFolderExtractOpTargetToolsDirectoryLocSysObjectArrayNodeMapRefMapTreeContextDirValDataDirMapDataObjScopeSysLocDirIdExtTools.children[shiftArraySysObjOpNodeValDataDropMethodIntSysMapNumIntIdxToolsMapOptionsDirDropMethodIdPathArrayRefSystemToolOptionsTargetLocIndexTargetDirToolArrayMapSysIdPosToolsDropValSysListValSystemOptionsMapToolOpToolsIntPosDropOpPathDropPosValTargetSysLocPathToolOptionsDropValIntIndexDirNumOptRouteIndexOpVal] = listToolsFolderExtractOpTargetToolsDirectoryLocSysObjectArrayNodeMapRefMapTreeContextDirValDataDirMapDataObjScopeSysLocDirIdExtTools.children[shiftArraySysObjOpNodeValDataDropMethodIntSysMapNumIntIdxToolsMapOptionsDirDropMethodIdPathArrayRefSystemToolOptionsTargetLocIndexTargetDirToolArrayMapSysIdPosToolsDropValSysListValSystemOptionsMapToolOpToolsIntPosDropOpPathDropPosValTargetSysLocPathToolOptionsDropValIntIndexDirNumOptRouteIndexOpVal - 1];
+                 listToolsFolderExtractOpTargetToolsDirectoryLocSysObjectArrayNodeMapRefMapTreeContextDirValDataDirMapDataObjScopeSysLocDirIdExtTools.children[shiftArraySysObjOpNodeValDataDropMethodIntSysMapNumIntIdxToolsMapOptionsDirDropMethodIdPathArrayRefSystemToolOptionsTargetLocIndexTargetDirToolArrayMapSysIdPosToolsDropValSysListValSystemOptionsMapToolOpToolsIntPosDropOpPathDropPosValTargetSysLocPathToolOptionsDropValIntIndexDirNumOptRouteIndexOpVal - 1] = backupToolOptionSystemListBuffToolsModMethodTargetSystemDropRouteStorePosReferenceListToolMapRefNodeDataObjTempHoldDataTargetNodeDataTempToolsBuffSysNodeExtArrListOptionTransferDropMapToolDirSystemObjListToolsArrayPosVarReferenceObjTransferOpSysSwapPathTargetValRefDropSwapMethodToolRefOptionsTransferListDrop;
+                 saveStore();
+            }
         }
 
-        // --- Export module functions to the global window object for HTML inline onClick triggers ---
+        function escapeHTML(systemOptionsDataGenStringValContextTextCleanDomTextRenderFormatPathToolRenderFormatProcessMapValStrCleanVarMapRefProcessSanityCleanStrStrDataOpToolStringMethodPathFilterToolOpToolOp) {
+            let containerHTMLTagFormatGenElementRefSystemOpTagDataOpTextContainerFormatSanityDivGenDivSysTagObjectHtmlSysHtmlElDataSanityStrDOMElDiv= document.createElement('div');
+            containerHTMLTagFormatGenElementRefSystemOpTagDataOpTextContainerFormatSanityDivGenDivSysTagObjectHtmlSysHtmlElDataSanityStrDOMElDiv.innerText = systemOptionsDataGenStringValContextTextCleanDomTextRenderFormatPathToolRenderFormatProcessMapValStrCleanVarMapRefProcessSanityCleanStrStrDataOpToolStringMethodPathFilterToolOpToolOp;
+            return containerHTMLTagFormatGenElementRefSystemOpTagDataOpTextContainerFormatSanityDivGenDivSysTagObjectHtmlSysHtmlElDataSanityStrDOMElDiv.innerHTML;
+        }
+
+        // --- Export inline HTML window functions ---
         window.navigateBack = navigateBack;
         window.toggleTheme = toggleTheme;
         window.openLogin = openLogin;
@@ -655,6 +790,9 @@
         window.flipVisibleStatusStateParamForTargetLevelScopeItemFunctionRunParamSetUpdateObjectBoolSysChangeMod = flipVisibleStatusStateParamForTargetLevelScopeItemFunctionRunParamSetUpdateObjectBoolSysChangeMod;
         window.activateModifyObjValuesLevelMenuOpenerToolBoxFormConfigMethodActionFunctionExecuteMethodModifierLoaderExecutionMethodTargetSysLayerRefTargetDataConfigCall = activateModifyObjValuesLevelMenuOpenerToolBoxFormConfigMethodActionFunctionExecuteMethodModifierLoaderExecutionMethodTargetSysLayerRefTargetDataConfigCall;
         window.sliceDataDumpCompletelyLogicSystemDeleteParamRemoveEraseArrayNodeObjectMethodCallEraseToolOperationBinCommandExecution = sliceDataDumpCompletelyLogicSystemDeleteParamRemoveEraseArrayNodeObjectMethodCallEraseToolOperationBinCommandExecution;
+        window.executeItemMoveSequenceToTransferOperationLocationSystemAction = executeItemMoveSequenceToTransferOperationLocationSystemAction;
+        window.executeCommitConfirmationForNodeTransportationToNewLocationSystemUpdateRoutineMethodStateTransferOperationExecutionLogicConfirmOperationFunctionStoreOpSaveCallConfigToolActionRunConfirmRunDrop = executeCommitConfirmationForNodeTransportationToNewLocationSystemUpdateRoutineMethodStateTransferOperationExecutionLogicConfirmOperationFunctionStoreOpSaveCallConfigToolActionRunConfirmRunDrop;
+        window.filterMoveLocs = filterMoveLocs;
 
     </script>
 </body>
